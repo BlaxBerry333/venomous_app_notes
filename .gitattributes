@@ -1,0 +1,8 @@
+# 忽略的语言检测
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
+*.js linguist-detectable=false
+*.cjs linguist-detectable=false
+*.mjs linguist-detectable=false
+*.json linguist-detectable=false

@@ -1,0 +1,79 @@
+version: "3.8"
+
+services:
+  # Notes App
+  # ----------------------------------------------------------------------------------------------------
+  # notes_app:
+  #   image: venomous_apps_notes_app:latest
+  #   container_name: notes_app
+  #   build:
+  #     context: ./notes_app
+  #     dockerfile: Dockerfile.dev
+  #   environment:
+  #     - DB_MONGODB_URI=mongodb://root:rootpass@notes_app_db:27017/
+  #   ports:
+  #     - "3600:3600"
+  #   volumes:
+  #     - ./notes_app:/app
+  #   depends_on:
+  #     - notes_app_db
+  #   networks:
+  #     - venomous_app_network
+
+  # Notes App Database ( MongoDB )
+  # ----------------------------------------------------------------------------------------------------
+  notes_app_db:
+    image: mongo
+    container_name: notes_app_db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpass
+    volumes:
+      - notes_app_db:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - venomous_app_network
+
+    # MongoDB Express
+  # ----------------------------------------------------------------------------------------------------
+  notes_app_mongo_express:
+    image: mongo-express
+    container_name: notes_app_mongo_express
+    ports:
+      - "3680:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: notes_app_db
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rootpass
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: rootpass
+    depends_on:
+      - notes_app_db
+    networks:
+      - venomous_app_network
+
+  # Redis
+  # ----------------------------------------------------------------------------------------------------
+  notes_app_redis:
+    image: redis:latest
+    container_name: notes_app_redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - notes_app_redis_data:/data
+    networks:
+      - venomous_app_network
+
+networks:
+  venomous_app_network:
+    driver: bridge
+
+volumes:
+  notes_app_db:
+  notes_app_redis_data:
