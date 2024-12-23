@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import useRoutes from "~/composables/use-routes";
-import useTranslation from "~/composables/use-translation";
+import useRoutes from "~/composables/core/use-routes";
+import useTranslation from "~/composables/core/use-translation";
+import useAccount from "~/composables/use-account";
 
-import LayoutHeaderSearchDialog from "~/components/common/layout-header-search-dialog.vue";
-import LayoutHeaderLanguageMenu from "~/components/common/layout-header-language-menu.vue";
-import LayoutHeaderAccountMenu from "~/components/common/layout-header-account-menu.vue";
-import LayoutHeaderAccountDialog from "~/components/common/layout-header-account-dialog.vue";
+import LayoutHeaderSearchDialog from "~/components/_/layout-header-search-dialog.vue";
+import LayoutHeaderLanguageMenu from "~/components/_/layout-header-language-menu.vue";
+import LayoutHeaderAccountMenu from "~/components/_/layout-header-account-menu.vue";
+import LayoutHeaderAccountDialog from "~/components/_/layout-header-account-dialog.vue";
+import useThemeMode from "~/composables/core/use-theme-mode";
 
 // ------------------------------------------------------------------------------------------
 
-const { isDarkModeTheme, toggleTheme } = useThemes();
+const { isDarkModeTheme, toggleTheme } = useThemeMode();
 
 // ------------------------------------------------------------------------------------------
 
@@ -30,12 +32,7 @@ const { isAuthenticated } = useAccount();
 </script>
 
 <template>
-  <v-app-bar
-    :elevation="2"
-    flat
-    class="px-2"
-    style="height: 64px; position: sticky; top: 0"
-  >
+  <v-app-bar :elevation="2" flat class="px-2" style="height: 64px; position: sticky; top: 0">
     <v-container class="mx-auto d-flex align-center justify-center">
       <v-row class="d-flex align-center">
         <!-- logo -->

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import useTranslation from "~/composables/use-translation";
+import useTranslation from "~/composables/core/use-translation";
 
 import LayoutHeaderAccountDialogForm from "./layout-header-account-dialog-form.vue";
+import useAccount from "~/composables/use-account";
 
 // ------------------------------------------------------------------------------------------
 
@@ -25,9 +26,7 @@ enum SelectableTab {
 
 const selectedTab = ref<SelectableTab>(SelectableTab.login);
 
-const isLoginTabPanel = computed<boolean>(
-  () => selectedTab.value === SelectableTab.login,
-);
+const isLoginTabPanel = computed<boolean>(() => selectedTab.value === SelectableTab.login);
 
 // ------------------------------------------------------------------------------------------
 
@@ -66,11 +65,7 @@ async function handleSubmit(closeDialog: () => void): Promise<void> {
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card
-        :loading="isSubmitting"
-        elevation="4"
-        class="py-10 px-6 px-lg-10 rounded-lg"
-      >
+      <v-card :loading="isSubmitting" elevation="4" class="py-10 px-6 px-lg-10 rounded-lg">
         <template v-slot:loader="{ isActive }">
           <v-progress-linear :active="isActive" indeterminate color="primary" />
         </template>

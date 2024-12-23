@@ -1,31 +1,67 @@
 <script setup lang="ts">
-import LayoutHeader from "~/components/common/layout-header.vue";
-// import LayoutSideMenu from "~/components/common/layout-sidemenu.vue";
+import layoutHeaderLogo from "~/components/layout-components/layout-header-logo.vue";
+import layoutHeaderThemeModeChanger from "~/components/layout-components/layout-header-theme-mode-changer.vue";
+import layoutHeaderThemeLanguageChanger from "~/components/layout-components/layout-header-theme-language-changer.vue";
+import layoutHeaderLargeScreenNavigation from "~/components/layout-components/layout-header-large-screen-navigation.vue";
+import layoutHeaderSmallScreenNavigation from "~/components/layout-components/layout-header-small-screen-navigation.vue";
+import layoutHeaderSmallScreenNavigationButton from "~/components/layout-components/layout-header-small-screen-navigation-button.vue";
+import layoutFooter from "~/components/layout-components/layout-footer.vue";
 
-// const isOpenSlideMenu = ref<boolean>(false);
-// const openSlideMenu = () => (isOpenSlideMenu.value = !isOpenSlideMenu.value);
-// provide("isOpenSlideMenu", isOpenSlideMenu);
-// provide("openSlideMenu", openSlideMenu);
+// ------------------------------------------------------------------------------------------
+
+const smallScreenDrawerIsOpen = ref<boolean>(false);
+
+function toggleSmallScreenDrawer(): void {
+  smallScreenDrawerIsOpen.value = !smallScreenDrawerIsOpen.value;
+}
+
+provide("smallScreenDrawerIsOpen", smallScreenDrawerIsOpen);
+provide("toggleSmallScreenDrawer", toggleSmallScreenDrawer);
+
+// ------------------------------------------------------------------------------------------
 </script>
 
 <template>
+  <NuxtRouteAnnouncer />
+
   <v-app>
-    <NuxtRouteAnnouncer />
+    <!-- layout header -->
+    <v-app-bar
+      flat
+      :height="60"
+      :elevation="4"
+      class="position-sticky top-0"
+      style="background-color: transparent; backdrop-filter: blur(10px)"
+    >
+      <v-container class="fill-height py-0 px-2 px-md-0">
+        <layout-header-logo />
+        <layout-header-large-screen-navigation />
+        <v-spacer />
+        <layout-header-theme-mode-changer />
+        <layout-header-theme-language-changer />
+        <layout-header-small-screen-navigation-button />
+      </v-container>
+    </v-app-bar>
 
-    <!-- header -->
-    <LayoutHeader />
+    <layout-header-small-screen-navigation />
 
-    <!-- main -->
+    <!-- layout main content -->
     <v-main class="pt-0">
-      <v-container>
-        <!-- each page content -->
+      <v-container
+        class="fill-height position-relative py-0 px-4 pt-4 d-flex flex-column justify-start align-start"
+      >
+        <!-- each page -->
+        <div id="background"></div>
         <slot />
       </v-container>
     </v-main>
+
+    <!-- layout footer -->
+    <layout-footer />
   </v-app>
 </template>
 
-<style>
+<style lang="scss">
 .page-enter-active,
 .page-leave-active {
   transition: all 0.2s;
@@ -38,5 +74,36 @@ import LayoutHeader from "~/components/common/layout-header.vue";
 
 body {
   min-width: 390px;
+}
+
+html,
+body {
+  overscroll-behavior: none; /* 防止拖动弹性效果（ iOS 特有问题 ） */
+}
+</style>
+
+<style scoped lang="scss">
+#background {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 20%;
+  right: -50%;
+  z-index: 0;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  filter: blur(20rem);
+  opacity: 0.5;
+  background: linear-gradient(to right, #00bfa5, #00bcd4);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
 </style>

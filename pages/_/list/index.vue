@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ReturnType } from "~/server/api/notes/list.get";
-import useTranslation from "~/composables/use-translation";
+import useTranslation from "~/composables/core/use-translation";
 import { SelectableNoteType, type NoteDataType } from "~/utils/types";
 
 import CustomLoadingDialogButton from "~/components/custom/buttons/loading-dialog-button.vue";
@@ -15,9 +15,8 @@ const selectedNoteType = ref<SelectableNoteType>(SelectableNoteType.raft);
 
 // ------------------------------------------------------------------------------------------
 
-const { data, status, refresh } = useAsyncData<ReturnType>(
-  `${selectedNoteType.value}`,
-  () => $fetch(`/api/notes/list?type=${selectedNoteType.value}`),
+const { data, status, refresh } = useAsyncData<ReturnType>(`${selectedNoteType.value}`, () =>
+  $fetch(`/api/notes/list?type=${selectedNoteType.value}`),
 );
 
 // ------------------------------------------------------------------------------------------
@@ -28,9 +27,7 @@ const noteList = computed<Array<NoteDataType>>(() => data.value?.data?.notes || 
 
 const isError = computed<boolean>(() => data.value?.error !== null);
 
-const isLoading = computed<boolean>(
-  () => status.value !== "success" && status.value !== "error",
-);
+const isLoading = computed<boolean>(() => status.value !== "success" && status.value !== "error");
 
 const isEmptyData = computed<boolean>(() => !noteList.value.length);
 
@@ -62,12 +59,7 @@ async function handleDataRefresh(): Promise<void> {
 
     <!-- when is response error -->
     <section v-if="isError" class="py-10">
-      <v-alert
-        v-if="errorMessage"
-        type="error"
-        title="Something Wrong"
-        :text="errorMessage"
-      />
+      <v-alert v-if="errorMessage" type="error" title="Something Wrong" :text="errorMessage" />
     </section>
 
     <!-- when is empty note list -->

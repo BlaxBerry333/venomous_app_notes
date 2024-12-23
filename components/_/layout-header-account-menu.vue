@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import useRoutes from "~/composables/use-routes";
-import useTranslation from "~/composables/use-translation";
+import useAccount from "~/composables/use-account";
+import useRoutes from "~/composables/core/use-routes";
+import useTranslation from "~/composables/core/use-translation";
 
 // ------------------------------------------------------------------------------------------
 

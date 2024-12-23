@@ -4,7 +4,7 @@ CONTAINER_NAME_NOTE_APP = notes_app
 CONTAINER_NAME_NOTE_APP_DB = notes_app_db
 
 
-.PHONY: setup stop-all clean-all
+.PHONY: setup stop-all clean-all entry
 
 
 # setup all containers
@@ -44,24 +44,6 @@ clean-all:
 			docker rmi ${PROJECT_NAME}_$$service; \
 		fi \
 	done
-
-
-# # stop a specific container
-# # example: make stop CONTAINER=notes_app_db
-# stop: 
-# 	@docker-compose \
-# 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
-# 		-p ${PROJECT_NAME} \
-# 		stop ${CONTAINER}
-
-
-# # restart a specific container
-# # example: make restart CONTAINER=notes_app_db
-# restart: 
-# 	@docker-compose \
-# 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
-# 		-p ${PROJECT_NAME} \
-# 		restart ${CONTAINER}
 
 
 # entry a running specific container

@@ -1,17 +1,22 @@
 # Venomous Apps's Notes App
 
-|                 | Main Skills                                                                                                  |     Topic      |  Port   |
-| :-------------: | ------------------------------------------------------------------------------------------------------------ | :------------: | :-----: |
-|  Notes App SSR  | [![My Skills](https://skillicons.dev/icons?i=docker,nuxt,vue&perline=4&theme=light)](https://skillicons.dev) | SSR + REST API | `3600`  |
-|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `27017` |
-| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `3680`  |
+|                 | Main Skills                                                                                                          |     Topic      |  Port   |
+| :-------------: | -------------------------------------------------------------------------------------------------------------------- | :------------: | :-----: |
+|  Notes App SSR  | [![My Skills](https://skillicons.dev/icons?i=docker,nuxt,vue,vuetify&perline=4&theme=light)](https://skillicons.dev) | SSR + REST API | `3600`  |
+|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)                      |       DB       | `27017` |
+| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)                      |       DB       | `3680`  |
 
 ## 🚀 Local Setup
 
 ```shell
 % cd venomous_app_notes
 % npm install
+
+# run all containers
 % make setup
+
+# run frontend server
+% npm run start:dev --force
 ```
 
 ## 🛠 Commands

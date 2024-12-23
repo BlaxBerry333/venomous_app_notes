@@ -2,7 +2,7 @@
 import type { ReturnType } from "~/server/api/notes/create.post";
 import { SelectableNoteType } from "~/utils/types";
 
-import useTranslation from "~/composables/use-translation";
+import useTranslation from "~/composables/core/use-translation";
 
 // ------------------------------------------------------------------------------------------
 

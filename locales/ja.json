@@ -1,9 +1,11 @@
 {
   "nav": {
     "home": "ホーム",
-    "list": "ノート一覧",
-    "create": "新規作成",
-    "account-details": "アカウント情報"
+    "note-list": "ノート一覧",
+    "note-create": "新規作成",
+    "account-profile": "アカウント情報",
+    "account-signup": "アカウント登録",
+    "account-signin": "ログイン"
   },
 
   "buttons": {
@@ -27,5 +29,17 @@
     "status-loading": "読み込み中...",
     "confirm-logout": "ログアウトしますか？",
     "confirm-logout-2": "再度ログインするまでアカウントにアクセスできなくなります。"
+  },
+
+  "pages-contents": {
+    "home-page": {
+      "section-1-title-1": "Venomous",
+      "section-1-title-2": "Notes App",
+      "section-1-description": "パーソナルノート管理アプリケーション、シンプルでパワフル",
+      "section-2-title-1": "もっと詳しく",
+      "section-2-title-2": "このノートアプリ",
+      "section-2-description-1": "このアプリは、あなたのひらめきを記録する究極のツールです！豊富なテキスト編集と分類機能で、2種類のアイデアを簡単に区別でき、思いついたアイデアを確実に整理できます",
+      "section-2-description-2": "このアプリをクリエイティブな整理整頓の便利なアシスタントにしましょう！"
+    }
   }
 }

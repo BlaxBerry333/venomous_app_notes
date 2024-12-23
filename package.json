@@ -1,6 +1,6 @@
 {
   "name": "venomous_app_notes",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "private": true,
   "license": "UNLICENSED",
   "author": "blaxberry333",
@@ -27,6 +27,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@nuxtjs/i18n": "^8.5.5",
+    "clsx": "^2.1.1",
     "mongoose": "^8.7.2",
     "nuxt": "^3.13.2",
     "vue": "^3.5.10",

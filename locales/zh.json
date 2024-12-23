@@ -1,9 +1,11 @@
 {
   "nav": {
     "home": "首页",
-    "list": "笔记列表",
-    "create": "新建笔记",
-    "account-details": "账号详情"
+    "note-list": "笔记列表",
+    "note-create": "新建笔记",
+    "account-profile": "账号详情",
+    "account-signup": "用户注册",
+    "account-signin": "用户登陆"
   },
 
   "buttons": {
@@ -27,5 +29,17 @@
     "status-loading": "加载中...",
     "confirm-logout": "确定要注销吗？",
     "confirm-logout-2": "注销后将无法访问您的帐户，直到再次登录"
+  },
+
+  "pages-contents": {
+    "home-page": {
+      "section-1-title-1": "Venomous",
+      "section-1-title-2": "Notes App",
+      "section-1-description": "个人笔记管理应用程序，简单而强大",
+      "section-2-title-1": "更多关于",
+      "section-2-title-2": "本笔记应用程序",
+      "section-2-description-1": "这款应用程序是记录灵感的终极工具！无论您身在何处，只需轻触屏幕，灵感就会立即被捕捉并按主题整理，方便您随时回顾。它丰富的文本编辑和分类功能可轻松区分两种类型，确保每一个突然冒出的想法都井然有序",
+      "section-2-description-2": "让这款应用程序成为您创意组织工作的得力助手！"
+    }
   }
 }

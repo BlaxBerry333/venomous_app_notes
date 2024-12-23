@@ -1,24 +1,9 @@
 version: "3.8"
 
 services:
-  # Notes App
+  # Notes App Frontend ( Nuxt.js )
   # ----------------------------------------------------------------------------------------------------
-  # notes_app:
-  #   image: venomous_apps_notes_app:latest
-  #   container_name: notes_app
-  #   build:
-  #     context: ./notes_app
-  #     dockerfile: Dockerfile.dev
-  #   environment:
-  #     - DB_MONGODB_URI=mongodb://root:rootpass@notes_app_db:27017/
-  #   ports:
-  #     - "3600:3600"
-  #   volumes:
-  #     - ./notes_app:/app
-  #   depends_on:
-  #     - notes_app_db
-  #   networks:
-  #     - venomous_app_network
+  # ...
 
   # Notes App Database ( MongoDB )
   # ----------------------------------------------------------------------------------------------------
@@ -40,7 +25,7 @@ services:
     networks:
       - venomous_app_network
 
-    # MongoDB Express
+  # MongoDB Express
   # ----------------------------------------------------------------------------------------------------
   notes_app_mongo_express:
     image: mongo-express
@@ -58,7 +43,7 @@ services:
     networks:
       - venomous_app_network
 
-  # Redis
+  # Notes App Redis
   # ----------------------------------------------------------------------------------------------------
   notes_app_redis:
     image: redis:latest

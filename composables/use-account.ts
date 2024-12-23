@@ -34,10 +34,7 @@ export default function () {
 
   // ------------------------------------------------------------------------------------------
 
-  async function handleLogoIn(
-    _: Pick<AccountDataType, "email">,
-    callback?: () => void,
-  ) {
+  async function handleLogoIn(_: Pick<AccountDataType, "email">, callback?: () => void) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // TODO:

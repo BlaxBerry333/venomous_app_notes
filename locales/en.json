@@ -1,9 +1,11 @@
 {
   "nav": {
     "home": "Home",
-    "list": "Note List",
-    "create": "Create Note",
-    "account-details": "Account Details"
+    "note-list": "Note List",
+    "note-create": "Create Note",
+    "account-profile": "Account Profile",
+    "account-signup": "Sign Up",
+    "account-signin": "Sign In"
   },
 
   "buttons": {
@@ -27,5 +29,17 @@
     "status-loading": "Loading...",
     "confirm-logout": "Are you sure you want to log out?",
     "confirm-logout-2": "After logging out you will not be able to access your account until you log in again."
+  },
+
+  "pages-contents": {
+    "home-page": {
+      "section-1-title-1": "Venomous",
+      "section-1-title-2": "Notes App",
+      "section-1-description": "Personal Notes Management Application, Simple yet Powerful",
+      "section-2-title-1": "More About",
+      "section-2-title-2": "This Notes App",
+      "section-2-description-1": "This app is the ultimate tool to keep track of your inspiration! No matter where you are, inspiration is instantly captured and organized by topic at the touch of a screen, making it easy to review at any time Its rich text editing and categorization features make it easy to distinguish between 2 kinds, ensuring that every idea that pops up is in order",
+      "section-2-description-2": "Let this app be your handy assistant in creative organization!"
+    }
   }
 }

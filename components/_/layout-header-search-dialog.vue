@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useTranslation from "~/composables/use-translation";
+import useTranslation from "~/composables/core/use-translation";
 
 // ------------------------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ async function handleDeleteSpecificResult(id: string | number) {
             <v-list-item
               :key="item.id"
               :title="`Item-${item.text}`"
-              class="py-2 mb-2 mx-2 rounded-lg cursor-pointer"
+              class="py-2 mb-2 mx-2 cursor-pointer"
               @click.stop="handleClickSpecificResult(item.id)"
             >
               <template v-slot:append>

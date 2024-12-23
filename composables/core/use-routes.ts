@@ -13,13 +13,18 @@ export default function () {
 
   // ------------------------------------------------------------------------------------------
 
-  const { push } = useRouter();
+  const { push, replace } = useRouter();
 
-  function navigateTo(newPath: string) {
+  function navigateTo(newPath: string, options?: { replace?: boolean }): void {
     if (checkIsCurrentPathname(newPath)) {
       return;
     }
-    push(newPath);
+
+    if (options?.replace) {
+      replace(newPath);
+    } else {
+      push(newPath);
+    }
   }
 
   // ------------------------------------------------------------------------------------------
