@@ -21,11 +21,5 @@ function navigateToHome(): void {
       aspect-ratio="16/9"
       draggable="false"
     />
-    <h1
-      class="text-h5 font-weight-black font-italic d-none d-md-block ml-0 ml-md-2"
-      style="letter-spacing: -1.5px !important"
-    >
-      <!-- {{ APP_INFO_NAME }} -->
-    </h1>
   </div>
 </template>

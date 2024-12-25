@@ -56,15 +56,5 @@ onMounted(() => {
 <style lang="scss">
 .v-list-item--variant-text .v-list-item__overlay {
   background-color: transparent !important;
-
-  // &::before {
-  //   content: "";
-  //   position: absolute;
-  //   bottom: -6px;
-  //   left: 0;
-  //   height: 4px;
-  //   width: 100%;
-  //   background: red; // 如何改为在template中进行条件判断并使用主題顏色
-  // }
 }
 </style>
