@@ -14,13 +14,15 @@ export default defineNuxtPlugin((app) => {
         light: {
           colors: {
             primary: colors.teal.base,
-            secondary: colors.teal.lighten1,
+            secondary: colors.teal.darken1,
+            error: colors.red.darken4,
           },
         },
         dark: {
           colors: {
             primary: colors.teal.base,
-            secondary: colors.teal.darken1,
+            secondary: colors.teal.accent2,
+            error: colors.red.darken1,
           },
         },
       },

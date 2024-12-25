@@ -10,7 +10,7 @@ const toggleSmallScreenDrawer = inject(
     :width="48"
     :height="48"
     style="min-width: 0"
-    class="d-flex d-md-none align-center justify-center"
+    class="d-flex d-md-none align-center justify-center text-secondary"
     icon="mdi-menu"
     @click.stop="toggleSmallScreenDrawer"
   />

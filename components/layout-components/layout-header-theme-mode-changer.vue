@@ -14,6 +14,6 @@ const { isDarkModeTheme, toggleTheme } = useThemeMode();
     class="d-flex align-center justify-center rounded-lg"
     :icon="isDarkModeTheme ? 'mdi-weather-sunny' : 'mdi-weather-night'"
     @click="toggleTheme"
-    color="primary"
+    color="secondary"
   />
 </template>

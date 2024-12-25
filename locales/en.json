@@ -4,7 +4,6 @@
     "note-list": "Note List",
     "note-create": "Create Note",
     "account-profile": "Account Profile",
-    "account-signup": "Sign Up",
     "account-signin": "Sign In"
   },
 
@@ -22,6 +21,12 @@
     "labels": {
       "email-address": "Email Address",
       "password": "Password"
+    },
+    "errors": {
+      "is-required": "Is Required",
+      "is-email": "Must be a valid email address",
+      "min-length": "Minimum length must be greater than {length} characters",
+      "max-length": "Maximum length must be less than {length} characters"
     }
   },
 
@@ -39,7 +44,11 @@
       "section-2-title-1": "More About",
       "section-2-title-2": "This Notes App",
       "section-2-description-1": "This app is the ultimate tool to keep track of your inspiration! No matter where you are, inspiration is instantly captured and organized by topic at the touch of a screen, making it easy to review at any time Its rich text editing and categorization features make it easy to distinguish between 2 kinds, ensuring that every idea that pops up is in order",
-      "section-2-description-2": "Let this app be your handy assistant in creative organization!"
+      "section-2-description-2": "Let this app be your handy assistant in creative organization!",
+      "section-2-navigation-button": "Get Started"
+    },
+    "account-signin-page": {
+      "title": "Let's Get Started"
     }
   }
 }

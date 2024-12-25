@@ -38,7 +38,7 @@ onMounted(() => {
       :class="
         clsx(
           'py-0 px-2 mb-0 mx-1 text-subtitle-2 font-weight-black text-center',
-          checkIsCurrentPathname(item.to) && 'text-primary',
+          checkIsCurrentPathname(item.to) && 'text-secondary',
         )
       "
     >
@@ -46,7 +46,7 @@ onMounted(() => {
 
       <div
         v-if="checkIsCurrentPathname(item.to)"
-        class="bg-primary w-100 position-absolute left-0 right-0"
+        class="bg-secondary w-100 position-absolute left-0 right-0"
         style="bottom: -6px; height: 2px"
       />
     </v-list-item>

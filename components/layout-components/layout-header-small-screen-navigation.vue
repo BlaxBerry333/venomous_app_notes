@@ -48,14 +48,14 @@ onMounted(() => {
           <v-icon
             :icon="item.icon"
             size="large"
-            :color="checkIsCurrentPathname(item.to) ? 'primary' : undefined"
+            :color="checkIsCurrentPathname(item.to) ? 'secondary' : undefined"
           />
         </template>
         <v-list-item-title
           :class="
             clsx(
               'text-subtitle-2 font-weight-black',
-              checkIsCurrentPathname(item.to) && 'text-primary',
+              checkIsCurrentPathname(item.to) && 'text-secondary',
             )
           "
         >

@@ -79,7 +79,7 @@ const { handleLogout, account } = useAccount();
               />
               <v-btn
                 :text="t('buttons.logout')"
-                @click="handleLogout(() => (isActive.value = false))"
+                @click="handleLogout()"
                 variant="flat"
                 color="error"
               />

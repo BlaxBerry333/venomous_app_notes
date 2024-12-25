@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import useTranslation from "~/composables/core/use-translation";
+import useRoutes from "~/composables/core/use-routes";
+import useAccount from "~/composables/use-account";
 import layoutPageContentWrapper from "~/components/layout-components/layout-page-content-wrapper.vue";
+import { PAGE_PATHNAME } from "~/utils/get-page-pathname";
 
 // ------------------------------------------------------------------------------------------
 
@@ -8,20 +11,32 @@ const config = useRuntimeConfig();
 
 const { t } = useTranslation();
 
-const PAGE_TITLE = ref<string>(t("nav.home"));
+// ------------------------------------------------------------------------------------------
+
+const { navigateTo } = useRoutes();
+
+const account = useAccount();
+
+const handleClickToAccount = () => {
+  if (account.isAuthenticated) {
+    navigateTo(PAGE_PATHNAME.noteList);
+    return;
+  }
+  navigateTo(PAGE_PATHNAME.accountSignin);
+};
 </script>
 
 <template>
-  <layout-page-content-wrapper :show-page-title="false" :page-title="PAGE_TITLE">
+  <layout-page-content-wrapper :show-page-title="false" :page-title="t('nav.home')">
     <!-- section 1 -->
     <section class="d-flex flex-column justify-center align-start">
       <h1 id="home-page-title" class="text-h2 text-md-h1 font-weight-black">
         <p>{{ t("pages-contents.home-page.section-1-title-1") }}</p>
-        <p class="text-primary mt-1 mt-md-0">
+        <p class="text-secondary mt-1 mt-md-0">
           {{ t("pages-contents.home-page.section-1-title-2") }}
         </p>
       </h1>
-      <v-chip variant="outlined" color="primary" class="mt-4 font-weight-black border-md">
+      <v-chip variant="outlined" color="secondary" class="mt-4 font-weight-black">
         Version {{ config.public.appInfo.version }}
       </v-chip>
       <p class="w-100 text-subtitle-1 text-md-h5 mt-10 text-grey">
@@ -49,6 +64,11 @@ const PAGE_TITLE = ref<string>(t("nav.home"));
       <p class="w-100 text-subtitle-1 text-md-h5 text-secondary font-weight-black mt-0 mt-md-4">
         {{ t("pages-contents.home-page.section-2-description-2") }}
       </p>
+      <div class="w-100 py-4">
+        <v-btn @click="handleClickToAccount">
+          {{ t("pages-contents.home-page.section-2-navigation-button") }}
+        </v-btn>
+      </div>
     </section>
     <v-divider />
 

@@ -1,4 +1,5 @@
 export const PAGE_PATHNAME = {
+  home: "/",
   noteList: "/note/list",
   noteCreate: "/note/create",
   accountProfile: "/account/",

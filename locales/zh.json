@@ -4,7 +4,6 @@
     "note-list": "笔记列表",
     "note-create": "新建笔记",
     "account-profile": "账号详情",
-    "account-signup": "用户注册",
     "account-signin": "用户登陆"
   },
 
@@ -22,6 +21,12 @@
     "labels": {
       "email-address": "登陆邮箱",
       "password": "登陆密码"
+    },
+    "errors": {
+      "is-required": "必填项目",
+      "is-email": "必须是有效的邮箱地址",
+      "min-length": "最小长度必须大于 {length} 个字符",
+      "max-length": "最大长度必须小于 {length} 个字符"
     }
   },
 
@@ -39,7 +44,11 @@
       "section-2-title-1": "更多关于",
       "section-2-title-2": "本笔记应用程序",
       "section-2-description-1": "这款应用程序是记录灵感的终极工具！无论您身在何处，只需轻触屏幕，灵感就会立即被捕捉并按主题整理，方便您随时回顾。它丰富的文本编辑和分类功能可轻松区分两种类型，确保每一个突然冒出的想法都井然有序",
-      "section-2-description-2": "让这款应用程序成为您创意组织工作的得力助手！"
+      "section-2-description-2": "让这款应用程序成为您创意组织工作的得力助手！",
+      "section-2-navigation-button": "让我们开始吧"
+    },
+    "account-signin-page": {
+      "title": "让我们开始吧"
     }
   }
 }

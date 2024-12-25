@@ -28,7 +28,7 @@ const navigation = computed<Array<{ label: string; value: string }>>(() => [
 
 // ------------------------------------------------------------------------------------------
 
-const { isAuthenticated } = useAccount();
+const account = useAccount();
 </script>
 
 <template>
@@ -92,7 +92,7 @@ const { isAuthenticated } = useAccount();
           </div>
 
           <!-- account -->
-          <LayoutHeaderAccountMenu v-if="isAuthenticated" />
+          <LayoutHeaderAccountMenu v-if="account.isAuthenticated" />
           <LayoutHeaderAccountDialog v-else />
         </v-col>
       </v-row>

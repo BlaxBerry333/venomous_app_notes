@@ -43,8 +43,8 @@ provide("toggleSmallScreenDrawer", toggleSmallScreenDrawer);
         <layout-header-logo />
         <layout-header-large-screen-navigation />
         <v-spacer />
-        <layout-header-theme-mode-changer />
         <layout-header-theme-language-changer />
+        <layout-header-theme-mode-changer />
         <layout-header-small-screen-navigation-button />
       </v-container>
     </v-app-bar>
@@ -56,8 +56,18 @@ provide("toggleSmallScreenDrawer", toggleSmallScreenDrawer);
       <v-container
         class="fill-height position-relative py-0 px-4 pt-4 d-flex flex-column justify-start align-start"
       >
-        <!-- each page -->
-        <slot />
+        <div
+          :style="{
+            height: '100%',
+            width: '100%',
+            position: 'relative',
+            zIndex: 1,
+          }"
+        >
+          <!-- each page -->
+          <slot />
+        </div>
+
         <div
           id="background"
           :style="{
