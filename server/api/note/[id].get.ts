@@ -1,9 +1,9 @@
 import { NoteModel } from "~/server/models";
 import { NoteDataType } from "~/utils/types";
 
-export type RequestBodyType = NoteDataType;
+export type GetNoteDataRequestBodyType = NoteDataType;
 
-export type ReturnType = {
+export type GetNoteDataReturnType = {
   code: number;
   error: null | string;
   data: null | {
@@ -13,11 +13,14 @@ export type ReturnType = {
 };
 
 /**
- * GET /api/notes/[id]
+ * GET /api/note/[id]
  */
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> => {
   try {
     const noteId = event.context.params?.id;
+
+    // ------------------------------------------------------------------------------------------
+
     if (!noteId) {
       return {
         code: 400,
@@ -42,9 +45,14 @@ export default defineEventHandler(async (event) => {
       error: null,
       data: {
         note,
+        message: "ok",
       },
     };
   } catch (error) {
-    return error;
+    return {
+      code: 500,
+      error: (error as Error).message,
+      data: null,
+    };
   }
 });

@@ -1,15 +1,15 @@
 import { NoteModel } from "~/server/models";
 import { NoteDataType } from "~/utils/types";
 
-export type QueriesType = {
-  type: ""; // 笔记类型
+export type GetNoteListQueriesType = {
+  type: NoteDataType["type"]; // 笔记类型
   sort: string; // 排序字段
   order_by: "asc" | "desc"; // 升序或降序
   page: number; // 当前页数
   count: number; // 当前页的展示数量
 };
 
-export type ReturnType = {
+export type GetNoteListReturnType = {
   code: number;
   error: null | string;
   data: null | {
@@ -21,43 +21,41 @@ export type ReturnType = {
 };
 
 /**
- * GET /api/notes/list
+ * GET /api/note/list
  *
  * @example
+ * /api/notes/list
  * /api/notes/list?type=raft
  * /api/notes/list?sort=created_at&order_by=asc
  * /api/notes/list?page=1&count=10
  */
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<GetNoteListReturnType> => {
   try {
-    const searchQueries = getQuery(event) as QueriesType;
+    const searchQueries = getQuery(event) as GetNoteListQueriesType;
 
     // ------------------------------------------------------------------------------------------
 
     const orderField = searchQueries?.sort || "created_at";
     const sortOption = searchQueries?.order_by === "asc" ? 1 : -1;
-
-    // ------------------------------------------------------------------------------------------
-
+    const typeField = searchQueries?.type;
     const page = searchQueries?.page || 1;
     const count = searchQueries?.count || 10;
-    const paginationSkip = (page - 1) * count;
-
-    const totalCount = await NoteModel.countDocuments();
 
     // ------------------------------------------------------------------------------------------
 
     const filterFields: Partial<NoteDataType> = {};
-
-    const typeField = searchQueries.type;
     if (typeField) filterFields.type = typeField;
 
     // ------------------------------------------------------------------------------------------
 
     const notes = await NoteModel.find(filterFields)
       .sort({ [orderField]: sortOption })
-      .skip(paginationSkip)
+      .skip((page - 1) * count)
       .limit(count);
+
+    const totalCount = await NoteModel.countDocuments();
+
+    // ------------------------------------------------------------------------------------------
 
     return {
       code: 200,

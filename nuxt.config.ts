@@ -3,7 +3,6 @@ import packageJson from "./package.json";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-
   devtools: { enabled: true },
 
   runtimeConfig: {
@@ -51,6 +50,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "nuxt-aos",
   ],
 
   vite: {

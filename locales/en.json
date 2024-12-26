@@ -3,6 +3,7 @@
     "home": "Home",
     "note-list": "Note List",
     "note-create": "Create Note",
+    "note-detail": "Note Detail",
     "account-profile": "Account Profile",
     "account-signin": "Sign In"
   },
@@ -43,7 +44,7 @@
       "section-1-description": "Personal Notes Management Application, Simple yet Powerful",
       "section-2-title-1": "More About",
       "section-2-title-2": "This Notes App",
-      "section-2-description-1": "This app is the ultimate tool to keep track of your inspiration! No matter where you are, inspiration is instantly captured and organized by topic at the touch of a screen, making it easy to review at any time Its rich text editing and categorization features make it easy to distinguish between 2 kinds, ensuring that every idea that pops up is in order",
+      "section-2-description-1": "This app is the ultimate tool for capturing and organizing your inspiration! Wherever you are, simply tap the screen to instantly capture your ideas and organize them by topic for easy review at any time. With its rich text editing and categorization features, distinguishing between two types of ideas is effortless, ensuring that every thought is neatly organized.",
       "section-2-description-2": "Let this app be your handy assistant in creative organization!",
       "section-2-navigation-button": "Get Started"
     },

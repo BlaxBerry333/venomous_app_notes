@@ -14,6 +14,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "prepare": "husky",
     "commit": "cd .. && npm run commit",
     "check-packages": "npx depcheck",
     "check-eslint": "eslint . --cache --cache-location=./.eslintcache",
@@ -22,7 +23,7 @@
     "eslint": "prettier --write .",
     "prettier": "eslint . --fix --cache --cache-location=./.prettiercache",
     "format-all": "npm run eslint && npm run prettier",
-    "prepare": "husky"
+    "clean": "npx nuxi cleanup"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -31,6 +32,7 @@
     "clsx": "^2.1.1",
     "mongoose": "^8.7.2",
     "nuxt": "^3.13.2",
+    "nuxt-aos": "^1.2.5",
     "pinia": "^2.3.0",
     "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "^3.5.10",

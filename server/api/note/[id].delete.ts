@@ -1,9 +1,7 @@
 import { NoteModel } from "~/server/models";
 import { NoteDataType } from "~/utils/types";
 
-export type RequestBodyType = NoteDataType;
-
-export type ReturnType = {
+export type DeleteNoteDataReturnType = {
   code: number;
   error: null | string;
   data: null | {
@@ -13,11 +11,14 @@ export type ReturnType = {
 };
 
 /**
- * PUT /api/notes/[id]
+ * DELETE /api/note/[id]
  */
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnType> => {
   try {
     const noteId = event.context.params?.id;
+
+    // ------------------------------------------------------------------------------------------
+
     if (!noteId) {
       return {
         code: 400,
@@ -26,23 +27,23 @@ export default defineEventHandler(async (event) => {
       };
     }
 
-    const body = (await readBody(event)) as RequestBodyType;
-
-    const updatedNote = await NoteModel.findOneAndUpdate(
-      { _id: noteId },
-      {
-        ...body,
-        updated_at: new Date().toISOString(),
-      },
-      { new: true },
-    );
+    const deletedNote = await NoteModel.findOneAndDelete({
+      _id: noteId,
+    });
+    if (!deletedNote) {
+      return {
+        code: 404,
+        error: "[404] Note not found.",
+        data: null,
+      };
+    }
 
     return {
       code: 200,
       error: null,
       data: {
-        note: updatedNote,
-        message: "Note updated successfully.",
+        note: deletedNote,
+        message: "Note deleted successfully.",
       },
     };
   } catch (error) {

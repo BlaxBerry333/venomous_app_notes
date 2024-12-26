@@ -30,27 +30,45 @@ const handleClickToAccount = () => {
   <layout-page-content-wrapper :show-page-title="false" :page-title="t('nav.home')">
     <!-- section 1 -->
     <section class="d-flex flex-column justify-center align-start">
-      <h1 id="home-page-title" class="text-h2 text-md-h1 font-weight-black">
-        <p>{{ t("pages-contents.home-page.section-1-title-1") }}</p>
-        <p class="text-secondary mt-1 mt-md-0">
+      <!-- titles -->
+      <h1 id="home-page-title" class="text-h2 text-sm-h1 font-weight-black">
+        <p data-aos="fade-up" data-aos-delay="0">
+          {{ t("pages-contents.home-page.section-1-title-1") }}
+        </p>
+        <p class="text-secondary mt-1 mt-md-0" data-aos="fade-up" data-aos-delay="100">
           {{ t("pages-contents.home-page.section-1-title-2") }}
         </p>
       </h1>
-      <v-chip variant="outlined" color="secondary" class="mt-4 font-weight-black">
+      <!-- version -->
+      <v-chip
+        variant="outlined"
+        color="secondary"
+        class="mt-4 font-weight-black"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
         Version {{ config.public.appInfo.version }}
       </v-chip>
-      <p class="w-100 text-subtitle-1 text-md-h5 mt-10 text-grey">
+      <!-- descriptions -->
+      <p
+        class="w-100 text-subtitle-1 text-sm-h6 text-md-h5 mt-10 text-grey"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         {{ t("pages-contents.home-page.section-1-description") }}
       </p>
-      <!-- <div class="text-center">
-        <v-btn @click="handleClickToAccount">Let's Start</v-btn>
-      </div> -->
     </section>
     <v-divider />
 
     <!-- section 2 -->
     <section class="d-flex flex-column justify-center align-center">
-      <h1 id="home-page-title" class="text-h4 text-md-h3 font-weight-black">
+      <!-- titles -->
+      <h1
+        id="home-page-title"
+        class="text-h4 text-md-h3 font-weight-black mb-10"
+        data-aos="fade-up"
+        data-aos-delay="0"
+      >
         <p class="d-block d-sm-inline-block">
           {{ t("pages-contents.home-page.section-2-title-1") }}
         </p>
@@ -58,13 +76,18 @@ const handleClickToAccount = () => {
           {{ t("pages-contents.home-page.section-2-title-2") }}
         </p>
       </h1>
-      <p class="w-100 text-subtitle-1 text-md-h5 mt-10 pt-0 pt-md-10 text-grey">
-        {{ t("pages-contents.home-page.section-2-description-1") }}
-      </p>
-      <p class="w-100 text-subtitle-1 text-md-h5 text-secondary font-weight-black mt-0 mt-md-4">
-        {{ t("pages-contents.home-page.section-2-description-2") }}
-      </p>
-      <div class="w-100 py-4">
+      <!-- descriptions -->
+      <div
+        class="w-100 text-subtitle-1 text-sm-h6 text-md-h5 pt-0 pt-md-10 mb-6 text-grey"
+        style="line-height: 160%"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <p>{{ t("pages-contents.home-page.section-2-description-1") }}</p>
+        <p class="text-secondary">{{ t("pages-contents.home-page.section-2-description-2") }}</p>
+      </div>
+      <!-- actions -->
+      <div class="w-100 py-4" data-aos="fade-up" data-aos-delay="200">
         <v-btn @click="handleClickToAccount">
           {{ t("pages-contents.home-page.section-2-navigation-button") }}
         </v-btn>
