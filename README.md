@@ -10,13 +10,12 @@
 
 ```shell
 % cd venomous_app_notes
-% npm install
 
-# run all containers
+# setup all containers
 % make setup
 
-# run frontend server
-% npm run start:dev --force
+# start all containers & start client server
+% make start-all
 ```
 
 ## 🛠 Commands
@@ -24,10 +23,12 @@
 ```shell
 # Containers
 % make setup                        # setup all containers
-% make start-all                    # start all containers
+% make build                        # build images of all containers
+% make start-all                    # start all containers & start client server
 % make stop-all                     # stop all containers
 % make clean-all                    # stop then remove all containers、volumes、images
 % make entry [CONTAINER_NAME]       # entry a specify container
+% make restart [CONTAINER_NAME] # restart a specific container
 
 # Server
 % npm run start:[mode] [--force]
@@ -46,63 +47,68 @@
 ## 📂 Project Structure
 
 ```shell
-venomous_apps/
-└── notes_app/
-    ├── .nuxt/
-    │
-    ├── public/
-    │
-    ├── assets/
-    │   ├── images/
-    │   └── ...
-    │
-    ├── components/
-    │   ├── common/
-    │   ├── custom/
-    │   └── ...
-    │
-    ├── layouts/
-    │
-    ├── pages/
-    │   ├── [route_name]/
-    │   │   ├── [sub_route_name].vue
-    │   │   └── index.vue
-    │   ├── index.vue
-    │   └── ...
-    │
-    ├── server
-    │   ├── api/
-    │   ├── middleware/
-    │   ├── models/
-    │   ├── plugins/
-    │   │
-    │   ├── tsconfig.json
-    │   └── ...
-    │
-    ├── plugins/
-   │   └── vuetify.ts
-    │   └── ...
-    │
-    ├── locals/
-    │   ├── [i18n_lang_code].json
-    │   └── ...
-    │
-    ├── utils/
-    │   └── ...
-    │
-    ├── Dockerfile.dev
-    │
-    ├── .env.[env_name]
-    ├── .depcheckrc
-    ├── .prettierrc
-    ├── package.json
-    ├── tsconfig.json
-    ├── eslint.config.mjs
-    ├── nuxt.config.ts
-    │
-    └── ...
+venomous_app_notes/
+├── .nuxt/
+│
+├── public/
+│
+├── assets/
+│   ├── images/
+│   └── ...
+│
+├── components/
+│   ├── common/
+│   ├── custom/
+│   └── ...
+│
+├── layouts/
+│
+├── pages/
+│   ├── [route_name]/
+│   │   ├── [sub_route_name].vue
+│   │   └── index.vue
+│   ├── index.vue
+│   └── ...
+│
+├── server
+│   ├── api/
+│   ├── middleware/
+│   ├── models/
+│   ├── plugins/
+│   │
+│   ├── tsconfig.json
+│   └── ...
+│
+├── plugins/
+│   ├── vuetify.ts
+│   └── ...
+│
+├── locals/
+│   ├── [i18n_lang_code].json
+│   └── ...
+│
+├── utils/
+│   └── ...
+│
+├── Dockerfile.dev
+│
+├── .env.[env_name]
+├── .depcheckrc
+├── .prettierrc
+├── package.json
+├── tsconfig.json
+├── eslint.config.mjs
+├── nuxt.config.ts
+│
+└── ...
 ```
 
 ## 🤔 Questions
 
-...
+> `command not found: docker-compose`
+
+```diff
+- % docker-compose --version
++ % docker compose version
+Docker Compose version v2.31.0-desktop.2
+```

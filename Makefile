@@ -4,28 +4,38 @@ CONTAINER_NAME_NOTE_APP = notes_app
 CONTAINER_NAME_NOTE_APP_DB = notes_app_db
 
 
-.PHONY: setup stop-all clean-all entry
+.PHONY: setup build start-all stop-all clean-all entry restart
 
 
 # setup all containers
 setup:
-	@docker-compose \
+	@docker compose \
 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
 		-p ${PROJECT_NAME} \
 		up -d \
 
 
-# start all containers
+# build images of all containers 
+build:
+	@docker compose \
+		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
+		-p ${PROJECT_NAME} \
+		build \
+
+
+# start all containers & start client server
 start-all:
-	@docker-compose \
+	@docker compose \
 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
 		-p ${PROJECT_NAME} \
 		start \
+	&& npm install \
+	&& npm run start:dev --force \
 
 
 # stop all containers
 stop-all:
-	@docker-compose \
+	@docker compose \
 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
 		-p ${PROJECT_NAME} \
 		stop
@@ -33,7 +43,7 @@ stop-all:
 
 # stop then remove all containers、volumes、images
 clean-all:
-	@docker-compose \
+	@docker compose \
 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
 		-p ${PROJECT_NAME} \
 		down -v
@@ -50,3 +60,12 @@ clean-all:
 # example: make entry CONTAINER=notes_app_db
 entry:
 	@docker exec -it ${CONTAINER} bash   
+
+
+# restart a specific container
+# example: make restart CONTAINER=admin_server
+restart: 
+	@docker compose \
+		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
+		-p ${PROJECT_NAME} \
+		restart ${CONTAINER}
