@@ -11,7 +11,7 @@ export type DeleteNoteDataReturnType = {
 };
 
 /**
- * DELETE /api/note/[id]
+ * DELETE /api/note/<id>
  */
 export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnType> => {
   try {

@@ -1,10 +1,21 @@
 # Venomous Apps's Notes App
 
-|                 | Main Skills                                                                                                          |     Topic      |  Port   |
-| :-------------: | -------------------------------------------------------------------------------------------------------------------- | :------------: | :-----: |
-|  Notes App SSR  | [![My Skills](https://skillicons.dev/icons?i=docker,nuxt,vue,vuetify&perline=4&theme=light)](https://skillicons.dev) | SSR + REST API | `3600`  |
-|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)                      |       DB       | `27017` |
-| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)                      |       DB       | `3680`  |
+|                 | Main Skills                                                                                                  |     Topic      |  Port  |
+| :-------------: | ------------------------------------------------------------------------------------------------------------ | :------------: | :----: |
+|  Notes App SSR  | [![My Skills](https://skillicons.dev/icons?i=docker,nuxt,vue&perline=4&theme=light)](https://skillicons.dev) | SSR + REST API | `3600` |
+|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `3700` |
+| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `3780` |
+| Notes App Redis | [![My Skills](https://skillicons.dev/icons?i=docker,redis&perline=4)](https://skillicons.dev)                |     Redis      | `3800` |
+
+## 📚 Tech Stacks
+
+- [nuxt.js]() v3
+- [vue]() v3.5
+- [vuetify]() v3
+- [pina]() v2
+- [mongoose]() v8
+- [protobuf](https://github.com/BlaxBerry333/venomous_app_protobuf)
+- ...
 
 ## 🚀 Local Setup
 
@@ -43,6 +54,17 @@
 % npm run eslint
 % npm run prettier
 ```
+
+## 🔗 API
+
+| Method | URL                | Description            |
+| ------ | ------------------ | ---------------------- |
+|        | nots               |                        |
+| GET    | `/api/note/list`   | get all notes          |
+| POST   | `/api/note/create` | create a note          |
+| POST   | `/api/note/<id>`   | get a specific note    |
+| PUT    | `/api/note/<id>`   | update a specific note |
+| DELETE | `/api/note/<id>`   | delete a specific note |
 
 ## 📂 Project Structure
 
@@ -102,6 +124,13 @@ venomous_app_notes/
 │
 └── ...
 ```
+
+## 📚 Tech Stacks
+
+- [Python]() v3.10.0
+- [Django]() v4.2.16
+- [django-rest-framework]() v3.15.2
+- [psycopg2-binary]() v2.9.9
 
 ## 🤔 Questions
 

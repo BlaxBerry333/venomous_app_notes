@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     const responseTime = `${durationMs}ms`; // 白色
 
     console.log(
-      `${currentDate}  ${requestMethod}  ${responseStatus}  ${responseTime}  ${requestURL}`,
+      `${currentDate}\t${requestMethod}\t${responseStatus}\t${responseTime}\t${requestURL}`,
     );
   });
 });

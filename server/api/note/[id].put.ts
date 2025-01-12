@@ -13,7 +13,7 @@ export type PutNoteDataReturnType = {
 };
 
 /**
- * PUT /api/note/[id]
+ * PUT /api/note/<id>
  */
 export default defineEventHandler(async (event): Promise<PutNoteDataReturnType> => {
   try {

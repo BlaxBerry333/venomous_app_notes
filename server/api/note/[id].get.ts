@@ -13,7 +13,7 @@ export type GetNoteDataReturnType = {
 };
 
 /**
- * GET /api/note/[id]
+ * GET /api/note/<id>
  */
 export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> => {
   try {

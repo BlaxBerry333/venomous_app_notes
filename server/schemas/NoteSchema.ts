@@ -10,12 +10,12 @@ const NoteSchema = new Schema({
     unique: true,
   },
   created_at: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: () => Date.now().toLocaleString(),
   },
   updated_at: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: () => Date.now().toLocaleString(),
   },
   message: {
     type: String,
