@@ -40,8 +40,8 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
         type: requestBody.type,
         title: requestBody.title,
         message: requestBody.message,
-        created_at: Date.now().toLocaleString(),
-        updated_at: Date.now().toLocaleString(),
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       },
     ]);
 
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
       code: 201,
       error: null,
       data: {
-        note: createdNote as unknown as NoteDataType,
+        note: createdNote[0],
         message: "Note created successfully.",
       },
     };

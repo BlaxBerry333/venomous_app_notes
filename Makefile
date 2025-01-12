@@ -1,7 +1,6 @@
 DOCKER_COMPOSE_FILE_PATH_DEV = docker-compose.dev.yml
-PROJECT_NAME = venomous_apps_notes
-CONTAINER_NAME_NOTE_APP = notes_app
-CONTAINER_NAME_NOTE_APP_DB = notes_app_db
+PROJECT_NAME = venomous_apps_notes_app
+IMAGE_NAME_SUFFIX_SSR = ssr
 
 
 .PHONY: setup build start-all stop-all clean-all entry restart
@@ -28,9 +27,8 @@ start-all:
 	@docker compose \
 		-f ${DOCKER_COMPOSE_FILE_PATH_DEV} \
 		-p ${PROJECT_NAME} \
-		start \
-	&& npm install \
-	&& npm run start:dev --force \
+		start
+	@npm run start:dev --force \
 
 
 # stop all containers
@@ -48,8 +46,7 @@ clean-all:
 		-p ${PROJECT_NAME} \
 		down -v
 	@for service in \
-		${CONTAINER_NAME_NOTE_APP} \
-		${CONTAINER_NAME_NOTE_APP_DB}; do \
+		${IMAGE_NAME_SUFFIX_SSR}; do \
 		if docker images -q ${PROJECT_NAME}_$$service; then \
 			docker rmi ${PROJECT_NAME}_$$service; \
 		fi \

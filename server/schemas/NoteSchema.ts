@@ -11,11 +11,11 @@ const NoteSchema = new Schema({
   },
   created_at: {
     type: String,
-    default: () => Date.now().toLocaleString(),
+    default: () => new Date().toISOString(),
   },
   updated_at: {
     type: String,
-    default: () => Date.now().toLocaleString(),
+    default: () => new Date().toISOString(),
   },
   message: {
     type: String,

@@ -24,10 +24,10 @@ export type GetNoteListReturnType = {
  * GET /api/note/list
  *
  * @example
- * /api/notes/list
- * /api/notes/list?type=raft
- * /api/notes/list?sort=created_at&order_by=asc
- * /api/notes/list?page=1&count=10
+ * /api/note/list
+ * /api/note/list?type=RAFT
+ * /api/note/list?sort=created_at&order_by=asc
+ * /api/note/list?page=1&count=10
  */
 export default defineEventHandler(async (event): Promise<GetNoteListReturnType> => {
   try {

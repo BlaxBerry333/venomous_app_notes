@@ -14,7 +14,7 @@ const { isLoading, mutate } = useCreateNoteApi();
 
 async function createMockData() {
   await mutate({
-    type: SelectableNoteType.raft,
+    type: SelectableNoteType.RAFT,
     title: "xxxxx" + new Date().toISOString(),
     message: "xxxxx" + new Date().toISOString(),
   });

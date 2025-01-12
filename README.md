@@ -59,7 +59,7 @@
 
 | Method | URL                | Description            |
 | ------ | ------------------ | ---------------------- |
-|        | nots               |                        |
+|        | notes              |                        |
 | GET    | `/api/note/list`   | get all notes          |
 | POST   | `/api/note/create` | create a note          |
 | POST   | `/api/note/<id>`   | get a specific note    |

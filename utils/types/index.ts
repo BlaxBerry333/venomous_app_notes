@@ -1,7 +1,7 @@
 import type { NoteDataType as ProtoNoteDataType } from "venomous_app_protobuf/ts/notes";
 
 export enum SelectableNoteType {
-  raft = "raft",
+  RAFT = "RAFT",
 }
 
 export type NoteDataType = {

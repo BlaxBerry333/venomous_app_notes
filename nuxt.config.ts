@@ -4,6 +4,7 @@ import packageJson from "./package.json";
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
+  experimental: { appManifest: false },
 
   runtimeConfig: {
     public: {

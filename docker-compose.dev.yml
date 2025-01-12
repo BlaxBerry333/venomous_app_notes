@@ -21,7 +21,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - venomous_app_network
+      - venomous_apps_network
 
   # MongoDB Express
   # ----------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ services:
     depends_on:
       - notes_app_db
     networks:
-      - venomous_app_network
+      - venomous_apps_network
 
   # Notes App Redis
   # ----------------------------------------------------------------------------------------------------
@@ -51,12 +51,13 @@ services:
     volumes:
       - notes_app_redis_data:/data
     networks:
-      - venomous_app_network
+      - venomous_apps_network
 
 networks:
-  venomous_app_network:
+  venomous_apps_network:
     driver: bridge
 
 volumes:
+  node_modules:
   notes_app_db:
   notes_app_redis_data:
