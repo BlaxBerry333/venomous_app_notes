@@ -128,13 +128,6 @@ venomous_app_notes/
 └── ...
 ```
 
-## 📚 Tech Stacks
-
-- [Python]() v3.10.0
-- [Django]() v4.2.16
-- [django-rest-framework]() v3.15.2
-- [psycopg2-binary]() v2.9.9
-
 ## 🤔 Questions
 
 > `command not found: docker-compose`
