@@ -1,4 +1,5 @@
 import { NoteModel } from "~/server/models";
+import { deleteRedisKey } from "~/server/utils/handle-redis";
 import { NoteDataType } from "~/utils/types";
 
 export type PutNoteDataRequestBodyType = NoteDataType;
@@ -36,6 +37,12 @@ export default defineEventHandler(async (event): Promise<PutNoteDataReturnType> 
       },
       { new: true },
     );
+
+    const REDIS_KEY: string = `note-${noteId}`;
+
+    await deleteRedisKey(REDIS_KEY);
+
+    // ------------------------------------------------------------------------------------------
 
     return {
       code: 200,

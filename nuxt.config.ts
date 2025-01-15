@@ -18,6 +18,9 @@ export default defineNuxtConfig({
     db: {
       mongodbURI: process.env.DB_MONGODB_URI,
       mongodbName: process.env.DB_MONGODB_DB_NAME,
+      redisURL: process.env.DB_REDIS_URL,
+      redisHost: process.env.DB_REDIS_HOST,
+      redisPort: Number(process.env.DB_REDIS_PORT),
     },
   },
 

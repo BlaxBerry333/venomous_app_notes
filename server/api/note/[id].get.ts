@@ -1,5 +1,6 @@
-import { NoteModel } from "~/server/models";
 import { NoteDataType } from "~/utils/types";
+import { NoteModel } from "~/server/models";
+import { getRedisKey, setRedisKey } from "~/server/utils/handle-redis";
 
 export type GetNoteDataRequestBodyType = NoteDataType;
 
@@ -29,6 +30,24 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
       };
     }
 
+    // ------------------------------------------------------------------------------------------
+
+    const REDIS_KEY: string = `note-${noteId}`;
+
+    const redisCachedNote = await getRedisKey<NoteDataType>(REDIS_KEY);
+    if (redisCachedNote) {
+      return {
+        code: 200,
+        error: null,
+        data: {
+          note: redisCachedNote,
+          message: "ok",
+        },
+      };
+    }
+
+    // ------------------------------------------------------------------------------------------
+
     const note = await NoteModel.findOne({
       _id: noteId,
     });
@@ -39,6 +58,10 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
         data: null,
       };
     }
+
+    await setRedisKey(REDIS_KEY, note, 60 * 5);
+
+    // ------------------------------------------------------------------------------------------
 
     return {
       code: 200,

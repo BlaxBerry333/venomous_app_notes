@@ -1,4 +1,5 @@
 import { NoteModel } from "~/server/models";
+import { deleteRedisKey } from "~/server/utils/handle-redis";
 import { NoteDataType } from "~/utils/types";
 
 export type PostNoteCreateRequestBodyType = Omit<NoteDataType, "_id" | "created_at" | "updated_at">;
@@ -44,6 +45,10 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
         updated_at: new Date().toISOString(),
       },
     ]);
+
+    const REDIS_KEY: string = `note-list`;
+
+    await deleteRedisKey(REDIS_KEY);
 
     // --------------------------------------------------------------------------------
 

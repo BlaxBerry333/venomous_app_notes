@@ -3,9 +3,9 @@
 |                 | Main Skills                                                                                                  |     Topic      |  Port  |
 | :-------------: | ------------------------------------------------------------------------------------------------------------ | :------------: | :----: |
 |  Notes App SSR  | [![My Skills](https://skillicons.dev/icons?i=docker,nuxt,vue&perline=4&theme=light)](https://skillicons.dev) | SSR + REST API | `3600` |
-|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `3700` |
-| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4)](https://skillicons.dev)              |       DB       | `3780` |
-| Notes App Redis | [![My Skills](https://skillicons.dev/icons?i=docker,redis&perline=4)](https://skillicons.dev)                |     Redis      | `3800` |
+|  Notes App DB   | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4&theme=light)](https://skillicons.dev)  |       DB       | `3700` |
+| MongoDB Express | [![My Skills](https://skillicons.dev/icons?i=docker,mongodb&perline=4&theme=light)](https://skillicons.dev)  |       DB       | `3780` |
+| Notes App Redis | [![My Skills](https://skillicons.dev/icons?i=docker,redis&perline=4&theme=light)](https://skillicons.dev)    |     Redis      | `3800` |
 
 ## 📚 Tech Stacks
 
@@ -14,6 +14,7 @@
 - [vuetify]() v3
 - [pina]() v2
 - [mongoose]() v8
+- [redis]() v4
 - [protobuf](https://github.com/BlaxBerry333/venomous_app_protobuf)
 - ...
 
@@ -95,11 +96,13 @@ venomous_app_notes/
 ├── server
 │   ├── api/
 │   ├── middleware/
-│   ├── models/
 │   ├── plugins/
-│   │
+│   ├── models/
+│   ├── schemas/
+│   ├── utils/
+│   ├── ...
 │   ├── tsconfig.json
-│   └── ...
+│   └── index.ts
 │
 ├── plugins/
 │   ├── vuetify.ts

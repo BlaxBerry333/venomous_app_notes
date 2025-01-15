@@ -1,5 +1,6 @@
-import { NoteModel } from "~/server/models";
 import { NoteDataType } from "~/utils/types";
+import { NoteModel } from "~/server/models";
+import { getRedisKey, setRedisKey } from "~/server/utils/handle-redis";
 
 export type GetNoteListQueriesType = {
   type: NoteDataType["type"]; // 笔记类型
@@ -12,12 +13,14 @@ export type GetNoteListQueriesType = {
 export type GetNoteListReturnType = {
   code: number;
   error: null | string;
-  data: null | {
-    totalCount: number;
-    totalPages: number;
-    currentPage: number;
-    notes: Array<NoteDataType>;
-  };
+  data: null | ListPageDataType;
+};
+
+type ListPageDataType = {
+  totalCount: number;
+  totalPages: number;
+  currentPage: number;
+  notes: Array<NoteDataType>;
 };
 
 /**
@@ -41,10 +44,21 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
     const page = searchQueries?.page || 1;
     const count = searchQueries?.count || 10;
 
-    // ------------------------------------------------------------------------------------------
-
     const filterFields: Partial<NoteDataType> = {};
     if (typeField) filterFields.type = typeField;
+
+    // ------------------------------------------------------------------------------------------
+
+    const REDIS_KEY: string = `note-list`;
+
+    const redisCachedNotes = await getRedisKey<ListPageDataType>(REDIS_KEY);
+    if (redisCachedNotes) {
+      return {
+        code: 200,
+        error: null,
+        data: redisCachedNotes,
+      };
+    }
 
     // ------------------------------------------------------------------------------------------
 
@@ -55,17 +69,21 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     const totalCount = await NoteModel.countDocuments();
 
+    const pageData = {
+      totalCount,
+      totalPages: Math.ceil(totalCount / count),
+      currentPage: page,
+      notes,
+    };
+
     // ------------------------------------------------------------------------------------------
+
+    await setRedisKey(REDIS_KEY, pageData, 60 * 5);
 
     return {
       code: 200,
       error: null,
-      data: {
-        totalCount,
-        totalPages: Math.ceil(totalCount / count),
-        currentPage: page,
-        notes,
-      },
+      data: pageData,
     };
   } catch (error) {
     return {

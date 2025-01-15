@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import logProcessTime from "./log-process-time";
+import { logProcessTime } from "./log-process-time";
 
 const config = useRuntimeConfig();
 
