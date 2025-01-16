@@ -41,9 +41,10 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
       };
     }
 
-    const REDIS_KEY: string = `note-${noteId}`;
-
-    await deleteRedisKey(REDIS_KEY);
+    const REDIS_KEY_1: string = `note-list`;
+    const REDIS_KEY_2: string = `note-${noteId}`;
+    await deleteRedisKey(REDIS_KEY_1);
+    await deleteRedisKey(REDIS_KEY_2);
 
     // ------------------------------------------------------------------------------------------
 
