@@ -33,7 +33,6 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
     // ------------------------------------------------------------------------------------------
 
     const REDIS_KEY: string = `note-${noteId}`;
-
     const redisCachedNote = await getRedisKey<NoteDataType>(REDIS_KEY);
     if (redisCachedNote) {
       return {

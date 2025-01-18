@@ -45,9 +45,17 @@ export async function getRedisKey<T>(key: string): Promise<T> {
 }
 
 /**
- * 删除 Redis 中的键值对
- * @param key {string} 键名
+ * 获取 Redis 中所有符合条件的键 ( 利用通配符获取 )
+ * @param pattern {string} 通配符
  */
-export async function deleteRedisKey(key: string): Promise<void> {
+export async function getRedisKeysByPattern(pattern: string): Promise<string[]> {
+  return await redisClient.keys(pattern);
+}
+
+/**
+ * 删除 Redis 中的键值对
+ * @param key {string|string[]} 键名
+ */
+export async function deleteRedisKey(key: string | string[]): Promise<void> {
   await redisClient.del(key);
 }

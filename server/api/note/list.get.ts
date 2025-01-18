@@ -40,16 +40,16 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     const orderField = searchQueries?.sort || "created_at";
     const sortOption = searchQueries?.order_by === "asc" ? 1 : -1;
-    const typeField = searchQueries?.type;
+    const typeField = searchQueries?.type || "ALL";
     const page = searchQueries?.page || 1;
     const count = searchQueries?.count || 10;
 
     const filterFields: Partial<NoteDataType> = {};
-    if (typeField) filterFields.type = typeField;
+    if (typeField !== "ALL") filterFields.type = typeField;
 
     // ------------------------------------------------------------------------------------------
 
-    const REDIS_KEY: string = `note-list`;
+    const REDIS_KEY: string = `note-list:${orderField}:${sortOption}:${typeField}:${page}:${count}`;
 
     const redisCachedNotes = await getRedisKey<ListPageDataType>(REDIS_KEY);
     if (redisCachedNotes) {

@@ -2,6 +2,7 @@ import type { NoteDataType as ProtoNoteDataType } from "venomous_app_protobuf/ts
 
 export enum SelectableNoteType {
   RAFT = "RAFT",
+  ALL = "ALL",
 }
 
 export type NoteDataType = {

@@ -1,5 +1,5 @@
 import { NoteModel } from "~/server/models";
-import { deleteRedisKey } from "~/server/utils/handle-redis";
+import { deleteRedisKey, getRedisKeysByPattern } from "~/server/utils/handle-redis";
 import { NoteDataType } from "~/utils/types";
 
 export type DeleteNoteDataReturnType = {
@@ -41,10 +41,12 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
       };
     }
 
-    const REDIS_KEY_1: string = `note-list`;
-    const REDIS_KEY_2: string = `note-${noteId}`;
-    await deleteRedisKey(REDIS_KEY_1);
-    await deleteRedisKey(REDIS_KEY_2);
+    const REDIS_KEYS: string[] = await getRedisKeysByPattern("note-list:*");
+    if (REDIS_KEYS.length > 0) {
+      await deleteRedisKey(REDIS_KEYS);
+    }
+    const REDIS_KEY: string = `note-${noteId}`;
+    await deleteRedisKey(REDIS_KEY);
 
     // ------------------------------------------------------------------------------------------
 
