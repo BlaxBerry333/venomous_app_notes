@@ -14,7 +14,7 @@ usePageMeta({ pageTitle: pageTitle });
 </script>
 
 <template>
-  <div class="w-100 h-100 position-relative">
+  <div class="w-100 h-100 position-relative d-flex flex-column">
     <!-- page title -->
     <section v-if="showPageTitle" class="my-4">
       <h3 class="text-h5 font-weight-black">{{ pageTitle }}</h3>

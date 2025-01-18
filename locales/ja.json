@@ -42,6 +42,32 @@
     "confirm-logout-2": "再度ログインするまでアカウントにアクセスできなくなります。"
   },
 
+  "components": {
+    "editor": {
+      "font-styles": "スタイル",
+      "bold": "太字",
+      "italic": "斜体",
+      "strike": "取り消し線",
+      "font-sizes": "サイズ",
+      "paragraph": "段落",
+      "h1": "見出し1",
+      "h2": "見出し2",
+      "h3": "見出し3",
+      "h4": "見出し4",
+      "h5": "見出し5",
+      "h6": "見出し6",
+      "list-types": "リストタイプ",
+      "bullet-list": "箇条書き",
+      "ordered-list": "番号付き",
+      "others": "その他",
+      "code": "コード",
+      "code-block": "コードブロック",
+      "blockquote": "引用",
+      "undo": "元に戻す",
+      "redo": "やり直す"
+    }
+  },
+
   "pages-contents": {
     "home-page": {
       "section-1-title-1": "Venomous",

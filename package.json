@@ -37,6 +37,7 @@
     "mongoose": "^8.7.2",
     "nuxt": "^3.13.2",
     "nuxt-aos": "^1.2.5",
+    "nuxt-tiptap-editor": "^2.1.4",
     "pinia": "^2.3.0",
     "pinia-plugin-persistedstate": "^4.2.0",
     "redis": "^4.7.0",
