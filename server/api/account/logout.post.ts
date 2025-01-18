@@ -6,7 +6,6 @@ export type PostAccountLogoutRequestBodyType = Pick<AccountDataType, "email" | "
 export type PostAccountLogoutReturnType = CommonResponseDataType<
   AccountDataType,
   {
-    account: AccountDataType;
     message: string;
   }
 >;
@@ -32,18 +31,6 @@ export default defineEventHandler(async (event): Promise<PostAccountLogoutReturn
       };
     }
 
-    // ------------------------------------------------------------------------------------------
-
-    const updatedAccount = await AccountModel.findOneAndUpdate(
-      { email: requestBody.email },
-      {
-        ...requestBody,
-        updated_at: new Date().toISOString(),
-        is_active: false,
-      },
-      { new: true },
-    );
-
     // --------------------------------------------------------------------------------
 
     event.node.res.statusCode = 200;
@@ -51,7 +38,6 @@ export default defineEventHandler(async (event): Promise<PostAccountLogoutReturn
       code: 200,
       error: null,
       data: {
-        account: updatedAccount as AccountDataType,
         message: "Account Logout successfully.",
       },
     };

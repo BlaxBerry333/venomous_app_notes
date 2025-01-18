@@ -16,6 +16,8 @@
 - [mongoose]() v8
 - [redis]() v4
 - [bcryptjs]() v2
+- [jsonwebtoken]() v9
+- [jwt-decode]() v4
 - [protobuf](https://github.com/BlaxBerry333/venomous_app_protobuf)
 - ...
 

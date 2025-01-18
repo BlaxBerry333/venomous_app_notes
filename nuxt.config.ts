@@ -22,6 +22,11 @@ export default defineNuxtConfig({
       redisHost: process.env.DB_REDIS_HOST,
       redisPort: Number(process.env.DB_REDIS_PORT),
     },
+    security: {
+      jwtSecretKey: process.env.SECURITY_JWT_SECRET_KEY,
+      jwtExpire: Number(process.env.SECURITY_JWT_EXPIRE),
+      jwtRefreshExpire: Number(process.env.SECURITY_JWT_REFRESH_EXPIRE),
+    },
   },
 
   app: {

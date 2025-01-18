@@ -1,13 +1,14 @@
+import { AccountDataType, CommonResponseDataType } from "~/utils/types";
 import { AccountModel } from "~/server/models";
 import { checkHashedMessageSync } from "~/server/utils/handle-bcrypt";
-import { AccountDataType, CommonResponseDataType } from "~/utils/types";
+import { signToken } from "~/server/utils/handle-jwt";
 
 export type PostAccountLoginRequestBodyType = Pick<AccountDataType, "email" | "password">;
 
 export type PostAccountLoginReturnType = CommonResponseDataType<
   AccountDataType,
   {
-    account: AccountDataType;
+    token: string;
     message: string;
   }
 >;
@@ -39,12 +40,6 @@ export default defineEventHandler(async (event): Promise<PostAccountLoginReturnT
       requestBody.password,
       existedAccount.password,
     );
-    console.log({
-      dbP: existedAccount.password,
-      p: requestBody.password,
-      isPasswordMatched,
-    });
-
     if (!isPasswordMatched) {
       event.node.res.statusCode = 401;
       return {
@@ -59,21 +54,38 @@ export default defineEventHandler(async (event): Promise<PostAccountLoginReturnT
     const updatedAccount = await AccountModel.findOneAndUpdate(
       { email: requestBody.email },
       {
-        ...requestBody,
         updated_at: new Date().toISOString(),
         is_active: true,
       },
       { new: true },
     );
+    if (!updatedAccount) {
+      event.node.res.statusCode = 500;
+      return {
+        code: 500,
+        error: "[500] Something went wrong.",
+        data: null,
+      };
+    }
 
     // --------------------------------------------------------------------------------
+
+    const accountData: Omit<AccountDataType, "password"> = {
+      _id: updatedAccount._id,
+      display_name: updatedAccount.display_name,
+      email: updatedAccount.email,
+      avatar: updatedAccount.avatar,
+      created_at: updatedAccount.created_at,
+      updated_at: updatedAccount.updated_at,
+      is_active: updatedAccount.is_active,
+    };
 
     event.node.res.statusCode = 200;
     return {
       code: 200,
       error: null,
       data: {
-        account: updatedAccount as AccountDataType,
+        token: signToken({ data: accountData }),
         message: "Account Login successfully.",
       },
     };
