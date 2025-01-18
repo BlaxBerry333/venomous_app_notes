@@ -21,6 +21,15 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
   try {
     const requestBody = (await readBody(event)) as PostNoteCreateRequestBodyType;
 
+    if (!requestBody.account_id) {
+      event.node.res.statusCode = 400;
+      return {
+        code: 400,
+        error: "[400] account_id is required.",
+        data: null,
+      };
+    }
+
     // ------------------------------------------------------------------------------------------
 
     const existedNote = await NoteModel.findOne({
