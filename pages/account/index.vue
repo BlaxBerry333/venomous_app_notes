@@ -23,8 +23,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <layout-page-content-wrapper :page-title="t('nav.account-profile')">
+  <layout-page-content-wrapper :page-title="t('pages-contents.account-profile-page.title')">
     <section class="d-flex flex-column flex-md-row mb-4 mb-md-6">
+      <!-- Mobile 小尺寸屏幕 -->
       <v-sheet
         border
         :elevation="6"
@@ -41,25 +42,64 @@ watchEffect(() => {
           draggable="false"
           class="rounded-circle cursor-pointer border-md"
         />
-        <section class="d-block d-md-none">
-          <p class="text-subtitle-1 font-weight-black">{{ account.account?.displayName }}</p>
-          <p class="text-grey">{{ account.account?.email }}</p>
+        <section class="w-100 d-flex flex-column justify-center align-center d-md-none mt-2">
+          <p class="text-h6 font-weight-black text-truncate" style="max-width: 300px">
+            {{ account.account?.display_name }}
+          </p>
+          <p class="text-grey mt-0 text-truncate" style="max-width: 300px">
+            {{ account.account?.email }}
+          </p>
+          <div class="text-grey mt-4">
+            <p class="text-caption">
+              <strong id="account-profile-page-strong-label">
+                {{ t("pages-contents.account-profile-page.created-at") }}
+              </strong>
+              {{ $dayjs(account.account?.created_at).format("YYYY/MM/DD HH:mm") }}
+            </p>
+            <p class="text-caption">
+              <strong id="account-profile-page-strong-label">
+                {{ t("pages-contents.account-profile-page.updated-at") }}
+              </strong>
+              {{ $dayjs(account.account?.updated_at).format("YYYY/MM/DD HH:mm") }}
+            </p>
+          </div>
         </section>
       </v-sheet>
 
+      <!-- PC 大尺寸屏幕 -->
       <v-sheet
         border
         :elevation="6"
         class="flex-1-1 d-none d-md-flex flex-column justify-space-between align-start py-md-6 px-md-6 ml-md-6"
         style="background-color: transparent; backdrop-filter: blur(20px)"
       >
-        <section>
-          <p class="text-h5 font-weight-black">{{ account.account?.displayName }}</p>
-          <p class="text-subtitle-1 text-grey">{{ account.account?.email }}</p>
+        <section class="w-100">
+          <p class="text-h5 font-weight-black text-truncate" style="max-width: 600px">
+            {{ account.account?.display_name }}
+          </p>
+          <p class="text-subtitle-1 text-grey text-truncate" style="max-width: 600px">
+            {{ account.account?.email }}
+          </p>
         </section>
-        <v-btn color="error" @click="account.handleLogout">
-          {{ t("buttons.logout") }}
-        </v-btn>
+        <section class="w-100 d-flex align-center justify-space-between">
+          <div class="text-subtitle-1 text-grey">
+            <p class="text-caption">
+              <strong id="account-profile-page-strong-label">
+                {{ t("pages-contents.account-profile-page.created-at") }}
+              </strong>
+              {{ $dayjs(account.account?.created_at).format("YYYY/MM/DD HH:mm") }}
+            </p>
+            <p class="text-caption">
+              <strong id="account-profile-page-strong-label">
+                {{ t("pages-contents.account-profile-page.updated-at") }}
+              </strong>
+              {{ $dayjs(account.account?.updated_at).format("YYYY/MM/DD HH:mm") }}
+            </p>
+          </div>
+          <v-btn color="error" @click="account.handleLogout">
+            {{ t("buttons.logout") }}
+          </v-btn>
+        </section>
       </v-sheet>
     </section>
 
@@ -81,3 +121,11 @@ watchEffect(() => {
     </section>
   </layout-page-content-wrapper>
 </template>
+
+<style scoped lang="scss">
+#account-profile-page-strong-label {
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+</style>

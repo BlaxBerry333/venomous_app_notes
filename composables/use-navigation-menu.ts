@@ -2,10 +2,10 @@ import useAccount from "~/composables/use-account";
 import { PAGE_PATHNAME } from "~/utils/get-page-pathname";
 
 export default function () {
-  const account = useAccount();
+  const { isAuthenticated } = storeToRefs(useAccount());
 
   const navigationItems = computed(() => {
-    if (!account.isAuthenticated) {
+    if (!isAuthenticated) {
       return [];
     }
     return [

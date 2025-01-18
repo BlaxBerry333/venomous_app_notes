@@ -15,10 +15,10 @@ const { t } = useTranslation();
 
 const { navigateTo } = useRoutes();
 
-const account = useAccount();
+const { isAuthenticated } = storeToRefs(useAccount());
 
 const handleClickToAccount = () => {
-  if (account.isAuthenticated) {
+  if (isAuthenticated) {
     navigateTo(PAGE_PATHNAME.noteList);
     return;
   }

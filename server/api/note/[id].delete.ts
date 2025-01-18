@@ -1,15 +1,11 @@
 import { NoteModel } from "~/server/models";
 import { deleteRedisKey, getRedisKeysByPattern } from "~/server/utils/handle-redis";
-import { NoteDataType } from "~/utils/types";
+import { CommonResponseDataType, NoteDataType } from "~/utils/types";
 
-export type DeleteNoteDataReturnType = {
-  code: number;
-  error: null | string;
-  data: null | {
-    note: NoteDataType;
-    message: string;
-  };
-};
+export type DeleteNoteDataReturnType = CommonResponseDataType<{
+  note: NoteDataType;
+  message: string;
+}>;
 
 /**
  * DELETE /api/note/<id>
@@ -21,6 +17,7 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
     // ------------------------------------------------------------------------------------------
 
     if (!noteId) {
+      event.node.res.statusCode = 400;
       return {
         code: 400,
         error: "[bad request] Note ID is required.",
@@ -34,6 +31,7 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
       _id: noteId,
     });
     if (!deletedNote) {
+      event.node.res.statusCode = 404;
       return {
         code: 404,
         error: "[404] Note not found.",
@@ -50,6 +48,7 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
 
     // ------------------------------------------------------------------------------------------
 
+    event.node.res.statusCode = 200;
     return {
       code: 200,
       error: null,
@@ -59,6 +58,7 @@ export default defineEventHandler(async (event): Promise<DeleteNoteDataReturnTyp
       },
     };
   } catch (error) {
+    event.node.res.statusCode = 500;
     return {
       code: 500,
       error: (error as Error).message,

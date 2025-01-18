@@ -1,3 +1,4 @@
+import useAccount from "~/composables/use-account";
 import type { GetNoteListQueriesType, GetNoteListReturnType } from "~/server/api/note/list.get";
 import type { NoteDataType } from "~/utils/types";
 
@@ -6,11 +7,14 @@ export default function ({
 }: {
   selectedNoteType?: GetNoteListQueriesType["type"];
 }) {
+  const { account } = storeToRefs(useAccount());
+
   // ------------------------------------------------------------------------------------------
 
   const url = computed<string>(() => {
-    if (selectedNoteType === undefined) return "/api/note/list";
-    return `/api/note/list?type=${selectedNoteType}`;
+    const baseUrl: string = `/api/note/list?account_id=${account.value?._id}`;
+    if (selectedNoteType === undefined) return baseUrl;
+    return `${baseUrl}&type=${selectedNoteType}`;
   });
 
   const {

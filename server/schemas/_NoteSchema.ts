@@ -20,6 +20,10 @@ const NoteSchema = new Schema({
   message: {
     type: String,
   },
+  account_id: {
+    type: String,
+    required: true,
+  },
 });
 
 export default NoteSchema;

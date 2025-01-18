@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
     "nuxt-aos",
+    "dayjs-nuxt",
   ],
 
   vite: {

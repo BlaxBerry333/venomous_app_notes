@@ -5,7 +5,8 @@
     "note-create": "新規作成",
     "note-detail": "ノート詳細",
     "account-profile": "アカウント情報",
-    "account-signin": "ログイン"
+    "account-signin": "ログイン",
+    "account-signup": "アカウント登録"
   },
 
   "buttons": {
@@ -15,19 +16,23 @@
     "logout": "ログアウト",
     "login": "ログイン",
     "signup": "アカウント登録",
-    "create": "作成"
+    "create": "作成",
+    "edit": "編集"
   },
 
   "form": {
     "labels": {
+      "display-name": "表示名",
       "email-address": "メールアドレス",
-      "password": "パスワード"
+      "password": "パスワード",
+      "check-password": "パスワードの確認"
     },
     "errors": {
       "is-required": "必須項目です。",
       "is-email": "有効なメールアドレスをご入力ください。",
       "min-length": "最小文字数は {length} 文字以上です。",
-      "max-length": "最大文字数は {length} 文字以下です。"
+      "max-length": "最大文字数は {length} 文字以下です。",
+      "password-not-match": "パスワードと確認パスワードが一致しません。"
     }
   },
 
@@ -49,7 +54,19 @@
       "section-2-navigation-button": "始めましょう"
     },
     "account-signin-page": {
-      "title": "始めましょう"
+      "title": "始めましょう",
+      "navigate-to-signup": "アカウントを作成しますか?"
+    },
+    "account-signup-page": {
+      "title": "アカウント登録へようこそ",
+      "navigate-to-signin": "アカウントをお持ちですか?"
+    },
+    "account-profile-page": {
+      "title": "アカウント情報",
+      "display-name": "表示名",
+      "email-address": "メールアドレス",
+      "created-at": "作成日時",
+      "updated-at": "更新日時"
     }
   }
 }

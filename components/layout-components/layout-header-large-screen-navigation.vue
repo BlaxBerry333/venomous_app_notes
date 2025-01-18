@@ -11,6 +11,8 @@ const { t } = useTranslation();
 
 const { checkIsCurrentPathname, navigateTo } = useRoutes();
 
+const { isAuthenticated } = storeToRefs(useAccount());
+
 const { navigationItems } = useNavItems();
 
 // ------------------------------------------------------------------------------------------
@@ -24,7 +26,7 @@ onMounted(() => {
 
 <template>
   <v-list
-    v-if="isMounted"
+    v-if="isAuthenticated && isMounted"
     nav
     class="h-100 d-none d-md-flex align-center ml-6 px-0 py-0"
     style="background-color: transparent; backdrop-filter: blur(10px)"

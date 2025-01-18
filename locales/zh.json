@@ -5,7 +5,8 @@
     "note-create": "新建笔记",
     "note-detail": "笔记详情",
     "account-profile": "账号详情",
-    "account-signin": "用户登陆"
+    "account-signin": "用户登陆",
+    "account-signup": "用户注册"
   },
 
   "buttons": {
@@ -15,19 +16,23 @@
     "logout": "退出登陆",
     "login": "用户登陆",
     "signup": "用户注册",
-    "create": "创建"
+    "create": "创建",
+    "edit": "编辑"
   },
 
   "form": {
     "labels": {
+      "display-name": "显示名称",
       "email-address": "登陆邮箱",
-      "password": "登陆密码"
+      "password": "登陆密码",
+      "check-password": "确认登陆密码"
     },
     "errors": {
       "is-required": "必填项目",
       "is-email": "必须是有效的邮箱地址",
       "min-length": "最小长度必须大于 {length} 个字符",
-      "max-length": "最大长度必须小于 {length} 个字符"
+      "max-length": "最大长度必须小于 {length} 个字符",
+      "password-not-match": "密码不匹配"
     }
   },
 
@@ -49,7 +54,19 @@
       "section-2-navigation-button": "让我们开始吧"
     },
     "account-signin-page": {
-      "title": "让我们开始吧"
+      "title": "让我们开始吧",
+      "navigate-to-signup": "创建新帐户吗?"
+    },
+    "account-signup-page": {
+      "title": "欢迎新用户注册",
+      "navigate-to-signin": "已经有帐户了吗?"
+    },
+    "account-profile-page": {
+      "title": "帐户详情",
+      "display-name": "显示名称",
+      "email-address": "登陆邮箱",
+      "created-at": "创建时间",
+      "updated-at": "更新时间"
     }
   }
 }

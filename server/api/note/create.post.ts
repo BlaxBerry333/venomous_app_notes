@@ -1,17 +1,18 @@
 import { NoteModel } from "~/server/models";
 import { deleteRedisKey, getRedisKeysByPattern } from "~/server/utils/handle-redis";
-import { NoteDataType } from "~/utils/types";
+import { AccountDataType, CommonResponseDataType, NoteDataType } from "~/utils/types";
 
-export type PostNoteCreateRequestBodyType = Omit<NoteDataType, "_id" | "created_at" | "updated_at">;
-
-export type PostNoteCreateReturnType = {
-  code: number;
-  error: null | string;
-  data: null | {
-    note: NoteDataType;
-    message: string;
-  };
+export type PostNoteCreateRequestBodyType = Omit<
+  NoteDataType,
+  "_id" | "created_at" | "updated_at"
+> & {
+  account_id: AccountDataType["_id"];
 };
+
+export type PostNoteCreateReturnType = CommonResponseDataType<{
+  note: NoteDataType;
+  message: string;
+}>;
 
 /**
  * POST /api/note/create
@@ -27,6 +28,7 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
     });
 
     if (!!existedNote) {
+      event.node.res.statusCode = 409;
       return {
         code: 409,
         error: "[409] Note already existed.",
@@ -43,6 +45,7 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
         message: requestBody.message,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
+        account_id: requestBody.account_id,
       },
     ]);
 
@@ -53,6 +56,7 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
 
     // --------------------------------------------------------------------------------
 
+    event.node.res.statusCode = 201;
     return {
       code: 201,
       error: null,
@@ -62,6 +66,7 @@ export default defineEventHandler(async (event): Promise<PostNoteCreateReturnTyp
       },
     };
   } catch (error) {
+    event.node.res.statusCode = 500;
     return {
       code: 500,
       error: (error as Error).message,

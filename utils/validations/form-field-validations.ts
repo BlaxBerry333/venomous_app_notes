@@ -1,5 +1,5 @@
 export const passwordValidation = {
-  minLength: 8,
+  minLength: 6,
   maxLength: 24,
   checkMinLength: (password: string) => password.length >= passwordValidation.minLength,
   checkMaxLength: (password: string) => password.length <= passwordValidation.maxLength,

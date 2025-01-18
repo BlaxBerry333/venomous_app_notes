@@ -15,6 +15,7 @@
 - [pina]() v2
 - [mongoose]() v8
 - [redis]() v4
+- [bcryptjs]() v2
 - [protobuf](https://github.com/BlaxBerry333/venomous_app_protobuf)
 - ...
 

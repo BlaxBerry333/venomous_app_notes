@@ -5,7 +5,8 @@
     "note-create": "Create Note",
     "note-detail": "Note Detail",
     "account-profile": "Account Profile",
-    "account-signin": "Sign In"
+    "account-signin": "Sign In",
+    "account-signup": "Sign Up"
   },
 
   "buttons": {
@@ -15,19 +16,23 @@
     "logout": "Logout",
     "login": "Login",
     "signup": "SignUp",
-    "create": "Create"
+    "create": "Create",
+    "edit": "Edit"
   },
 
   "form": {
     "labels": {
+      "display-name": "Display Name",
       "email-address": "Email Address",
-      "password": "Password"
+      "password": "Password",
+      "check-password": "Check Password"
     },
     "errors": {
       "is-required": "Is Required",
       "is-email": "Must be a valid email address",
       "min-length": "Minimum length must be greater than {length} characters",
-      "max-length": "Maximum length must be less than {length} characters"
+      "max-length": "Maximum length must be less than {length} characters",
+      "password-not-match": "Password does not match"
     }
   },
 
@@ -49,7 +54,19 @@
       "section-2-navigation-button": "Get Started"
     },
     "account-signin-page": {
-      "title": "Let's Get Started"
+      "title": "Let's Get Started",
+      "navigate-to-signup": "Create a new account?"
+    },
+    "account-signup-page": {
+      "title": "Welcome to Registration",
+      "navigate-to-signin": "Already have an account?"
+    },
+    "account-profile-page": {
+      "title": "Account Details",
+      "display-name": "Display Name",
+      "email-address": "Email Address",
+      "created-at": "Created At",
+      "updated-at": "Updated At"
     }
   }
 }

@@ -1,17 +1,13 @@
-import { NoteDataType } from "~/utils/types";
+import { CommonResponseDataType, NoteDataType } from "~/utils/types";
 import { NoteModel } from "~/server/models";
 import { getRedisKey, setRedisKey } from "~/server/utils/handle-redis";
 
 export type GetNoteDataRequestBodyType = NoteDataType;
 
-export type GetNoteDataReturnType = {
-  code: number;
-  error: null | string;
-  data: null | {
-    note: NoteDataType;
-    message: string;
-  };
-};
+export type GetNoteDataReturnType = CommonResponseDataType<{
+  note: NoteDataType;
+  message: string;
+}>;
 
 /**
  * GET /api/note/<id>
@@ -23,6 +19,7 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
     // ------------------------------------------------------------------------------------------
 
     if (!noteId) {
+      event.node.res.statusCode = 400;
       return {
         code: 400,
         error: "[bad request] Note ID is required.",
@@ -35,6 +32,7 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
     const REDIS_KEY: string = `note-${noteId}`;
     const redisCachedNote = await getRedisKey<NoteDataType>(REDIS_KEY);
     if (redisCachedNote) {
+      event.node.res.statusCode = 200;
       return {
         code: 200,
         error: null,
@@ -51,6 +49,7 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
       _id: noteId,
     });
     if (!note) {
+      event.node.res.statusCode = 404;
       return {
         code: 404,
         error: "[404] Note not found.",
@@ -62,6 +61,7 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
 
     // ------------------------------------------------------------------------------------------
 
+    event.node.res.statusCode = 200;
     return {
       code: 200,
       error: null,
@@ -71,6 +71,7 @@ export default defineEventHandler(async (event): Promise<GetNoteDataReturnType> 
       },
     };
   } catch (error) {
+    event.node.res.statusCode = 500;
     return {
       code: 500,
       error: (error as Error).message,

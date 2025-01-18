@@ -1,4 +1,4 @@
-import { NoteDataType } from "~/utils/types";
+import { AccountDataType, CommonResponseDataType, NoteDataType } from "~/utils/types";
 import { NoteModel } from "~/server/models";
 import { getRedisKey, setRedisKey } from "~/server/utils/handle-redis";
 
@@ -8,13 +8,11 @@ export type GetNoteListQueriesType = {
   order_by: "asc" | "desc"; // 升序或降序
   page: number; // 当前页数
   count: number; // 当前页的展示数量
+} & {
+  account_id: AccountDataType["_id"];
 };
 
-export type GetNoteListReturnType = {
-  code: number;
-  error: null | string;
-  data: null | ListPageDataType;
-};
+export type GetNoteListReturnType = CommonResponseDataType<ListPageDataType>;
 
 type ListPageDataType = {
   totalCount: number;
@@ -43,9 +41,11 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
     const typeField = searchQueries?.type || "ALL";
     const page = searchQueries?.page || 1;
     const count = searchQueries?.count || 10;
+    const account_id = searchQueries?.account_id || "";
 
     const filterFields: Partial<NoteDataType> = {};
     if (typeField !== "ALL") filterFields.type = typeField;
+    if (account_id) filterFields.account_id = account_id;
 
     // ------------------------------------------------------------------------------------------
 
@@ -53,6 +53,7 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     const redisCachedNotes = await getRedisKey<ListPageDataType>(REDIS_KEY);
     if (redisCachedNotes) {
+      event.node.res.statusCode = 200;
       return {
         code: 200,
         error: null,
@@ -61,6 +62,8 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
     }
 
     // ------------------------------------------------------------------------------------------
+
+    console.log(filterFields);
 
     const notes = await NoteModel.find(filterFields)
       .sort({ [orderField]: sortOption })
@@ -80,12 +83,14 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     await setRedisKey(REDIS_KEY, pageData, 60 * 5);
 
+    event.node.res.statusCode = 200;
     return {
       code: 200,
       error: null,
       data: pageData,
     };
   } catch (error) {
+    event.node.res.statusCode = 500;
     return {
       code: 500,
       error: (error as Error).message,
