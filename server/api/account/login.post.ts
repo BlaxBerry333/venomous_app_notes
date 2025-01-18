@@ -78,6 +78,7 @@ export default defineEventHandler(async (event): Promise<PostAccountLoginReturnT
       created_at: updatedAccount.created_at,
       updated_at: updatedAccount.updated_at,
       is_active: updatedAccount.is_active,
+      role: updatedAccount.role,
     };
 
     event.node.res.statusCode = 200;
@@ -85,7 +86,7 @@ export default defineEventHandler(async (event): Promise<PostAccountLoginReturnT
       code: 200,
       error: null,
       data: {
-        token: signToken({ data: accountData }),
+        token: signToken(accountData),
         message: "Account Login successfully.",
       },
     };

@@ -85,6 +85,7 @@ const useAccount = defineStore(
 
     return {
       account,
+      accessToken,
       isAuthenticated,
       handleLogoIn,
       handleLogout,
@@ -93,7 +94,7 @@ const useAccount = defineStore(
   },
   {
     persist: {
-      pick: ["account", "isAuthenticated"],
+      pick: ["accessToken", "account", "isAuthenticated"],
     },
   },
 );

@@ -7,10 +7,10 @@ const expires: number = config.security.jwtExpire;
 /**
  * 签发 token
  */
-export const signToken = (payload: object) => {
+export function signToken(payload: object): string {
   return jwt.sign(
     {
-      ...payload,
+      data: payload,
       expiresIn: expires,
     },
     secretKey,
@@ -18,21 +18,20 @@ export const signToken = (payload: object) => {
       expiresIn: expires,
     },
   );
-};
+}
 
 /**
  * 验证 token
+ * @description
+ * - iat: (令牌的发行时间戳) Math.floor(Date.now() / 1000)
+ * - exp: (Token的过期时间戳) iat + tokenExpirationTime
+ * - expiresIn: (表示Token的有效期限)
  */
-export const verifyToken = (token: string) => {
-  try {
-    return jwt.verify(token, secretKey);
-  } catch (error) {
-    if (error instanceof jwt.JsonWebTokenError) {
-      throw new Error("[Unauthorized] Invalid access token"); // Handle JWT errors
-    } else if (error instanceof jwt.TokenExpiredError) {
-      throw new Error("[Unauthorized] Expired access token"); // Handle token expiration
-    } else {
-      throw new Error("[Unauthorized] Access token verification failed"); // Handle other errors
-    }
-  }
-};
+export function verifyToken<T>(token: string) {
+  return jwt.verify(token, secretKey) as {
+    data: T;
+    iat: number;
+    exp: number;
+    expiresIn: number;
+  };
+}

@@ -61,14 +61,19 @@
 
 ## 🔗 API
 
-| Method | URL                | Description            |
-| ------ | ------------------ | ---------------------- |
-|        | notes              |                        |
-| GET    | `/api/note/list`   | get all notes          |
-| POST   | `/api/note/create` | create a note          |
-| POST   | `/api/note/<id>`   | get a specific note    |
-| PUT    | `/api/note/<id>`   | update a specific note |
-| DELETE | `/api/note/<id>`   | delete a specific note |
+| Method | URL                    | Description            |
+| ------ | ---------------------- | ---------------------- |
+|        | accounts               |                        |
+| POST   | `/api/account/signup`  | sign up                |
+| POST   | `/api/account/login`   | login                  |
+| POST   | `/api/account/logout`  | logout                 |
+| GET    | `/api/account/<email>` | get a specific account |
+|        | notes                  |                        |
+| GET    | `/api/note/list`       | get all notes          |
+| POST   | `/api/note/create`     | create a note          |
+| POST   | `/api/note/<id>`       | get a specific note    |
+| PUT    | `/api/note/<id>`       | update a specific note |
+| DELETE | `/api/note/<id>`       | delete a specific note |
 
 ## 📂 Project Structure
 

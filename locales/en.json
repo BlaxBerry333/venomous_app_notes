@@ -67,6 +67,12 @@
       "email-address": "Email Address",
       "created-at": "Created At",
       "updated-at": "Updated At"
+    },
+    "note-list-page": {},
+    "note-detail-page": {
+      "title": "Note Details",
+      "created-at": "Created At",
+      "updated-at": "Updated At"
     }
   }
 }

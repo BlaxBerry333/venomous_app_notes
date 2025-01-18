@@ -5,7 +5,7 @@ import {
 } from "~/server/api/note/create.post";
 
 export default function () {
-  const { account } = storeToRefs(useAccount());
+  const { account, accessToken } = storeToRefs(useAccount());
 
   // ------------------------------------------------------------------------------------------
 
@@ -16,9 +16,18 @@ export default function () {
   async function mutate(data: Omit<PostNoteCreateRequestBodyType, "account_id">) {
     isLoading.value = true;
 
+    if (!accessToken.value) {
+      isLoading.value = false;
+      throw new Error("[Unauthorized] Invalid access token");
+    }
+
     try {
       await $fetch<PostNoteCreateReturnType>("/api/note/create", {
         method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken.value}`,
+        },
         body: {
           ...data,
           ...(account.value?._id ? { account_id: account.value?._id } : {}),
@@ -30,6 +39,8 @@ export default function () {
           }
         },
       });
+
+      navigateTo(PAGE_PATHNAME.noteList, { replace: true });
     } catch (e) {
       error.value = (e as Error).message;
     } finally {

@@ -67,6 +67,12 @@
       "email-address": "メールアドレス",
       "created-at": "作成日時",
       "updated-at": "更新日時"
+    },
+    "note-list-page": {},
+    "note-detail-page": {
+      "title": "ノート詳細",
+      "created-at": "作成日時",
+      "updated-at": "更新日時"
     }
   }
 }

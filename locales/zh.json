@@ -67,6 +67,12 @@
       "email-address": "登陆邮箱",
       "created-at": "创建时间",
       "updated-at": "更新时间"
+    },
+    "note-list-page": {},
+    "note-detail-page": {
+      "title": "笔记详情",
+      "created-at": "创建时间",
+      "updated-at": "更新时间"
     }
   }
 }

@@ -1,8 +1,11 @@
-import { AccountDataType, CommonResponseDataType } from "~/utils/types";
+import { AccountDataType, AccountRoleType, CommonResponseDataType } from "~/utils/types";
 import { AccountModel } from "~/server/models";
 import { hashMessageSync } from "~/server/utils/handle-bcrypt";
 
-export type PostAccountSignupRequestBodyType = Pick<AccountDataType, "email" | "password">;
+export type PostAccountSignupRequestBodyType = Pick<
+  AccountDataType,
+  "email" | "password" | "display_name"
+>;
 
 export type PostAccountSignupReturnType = CommonResponseDataType<
   AccountDataType,
@@ -37,7 +40,7 @@ export default defineEventHandler(async (event): Promise<PostAccountSignupReturn
 
     const createdAccount = await AccountModel.create([
       {
-        display_name: requestBody.email,
+        display_name: requestBody.display_name || requestBody.email,
         email: requestBody.email,
         password: hashMessageSync(requestBody.password),
         avatar:
@@ -58,6 +61,7 @@ export default defineEventHandler(async (event): Promise<PostAccountSignupReturn
       created_at: createdAccount[0].created_at,
       updated_at: createdAccount[0].updated_at,
       is_active: createdAccount[0].is_active,
+      role: AccountRoleType["NORMAL"],
     };
 
     event.node.res.statusCode = 201;
@@ -65,7 +69,7 @@ export default defineEventHandler(async (event): Promise<PostAccountSignupReturn
       code: 201,
       error: null,
       data: {
-        token: signToken({ data: accountData }),
+        token: signToken(accountData),
         message: "Account created successfully.",
       },
     };

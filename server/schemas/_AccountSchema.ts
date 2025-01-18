@@ -28,6 +28,12 @@ const AccountSchema = new Schema({
     type: Boolean,
     default: true,
   },
+  role: {
+    type: String,
+    required: true,
+    enum: ["NORMAL", "ADMIN"],
+    default: "NORMAL",
+  },
 });
 
 export default AccountSchema;

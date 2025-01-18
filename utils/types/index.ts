@@ -24,6 +24,11 @@ export type NoteDataType = {
   account_id: string;
 };
 
+export enum AccountRoleType {
+  NORMAL = "NORMAL",
+  ADMIN = "ADMIN",
+}
+
 export type AccountDataType = {
   _id: string;
   display_name: string;
@@ -32,5 +37,6 @@ export type AccountDataType = {
   avatar: string;
   created_at: string;
   updated_at: string;
+  role: AccountRoleType;
   is_active: boolean;
 };
