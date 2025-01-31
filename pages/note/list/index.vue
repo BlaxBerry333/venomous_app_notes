@@ -29,9 +29,11 @@ const { data, isLoading, isEmpty } = useGetNoteList({ selectedNoteType: undefine
             <div class="card-mask" />
             <div class="card-title">
               <v-card-subtitle class="font-weight-black text-grey-lighten-2">
-                {{ $dayjs(note.created_at).format("YYYY/MM/DD HH:mm") }}
+                {{ $dayjs(note.updated_at).format("YYYY/MM/DD HH:mm") }}
               </v-card-subtitle>
-              <v-card-title class="text-white font-weight-black">{{ note.message }}</v-card-title>
+              <v-card-title class="text-white font-weight-black">
+                {{ note.message.match(/>([^<]+)<\/\w+/)?.[1] || "" }}
+              </v-card-title>
             </div>
           </v-card>
         </v-col>
