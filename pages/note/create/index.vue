@@ -2,6 +2,7 @@
 import { SelectableNoteType } from "~/utils/types";
 import useTranslation from "~/composables/core/use-translation";
 import useCreateNote from "~/composables/use-api/use-create-note";
+import useAccount from "~/composables/use-account";
 import layoutPageContentWrapper from "~/components/layout-components/layout-page-content-wrapper.vue";
 import customTiptapEditor from "~/components/custom/editor/custom-tiptap-editor.vue";
 
@@ -11,6 +12,7 @@ const { t } = useTranslation();
 
 // ------------------------------------------------------------------------------------------
 
+const { account } = storeToRefs(useAccount());
 const { isLoading, mutate } = useCreateNote();
 
 const editorData = reactive<{ content: string }>({
@@ -20,7 +22,7 @@ const editorData = reactive<{ content: string }>({
 async function createMockData() {
   await mutate({
     type: SelectableNoteType.RAFT,
-    title: "",
+    title: account.value?._id + "_" + Date.now(),
     message: editorData.content,
   });
 }

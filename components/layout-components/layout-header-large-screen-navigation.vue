@@ -4,6 +4,7 @@ import clsx from "clsx";
 import useTranslation from "~/composables/core/use-translation";
 import useRoutes from "~/composables/core/use-routes";
 import useNavItems from "~/composables/use-navigation-menu";
+import useAccount from "~/composables/use-account";
 
 // ------------------------------------------------------------------------------------------
 
