@@ -7,7 +7,7 @@ export default function ({
 }: {
   selectedNoteType?: GetNoteListQueriesType["type"];
 }) {
-  const { account } = storeToRefs(useAccount());
+  const { account, accessToken } = storeToRefs(useAccount());
 
   // ------------------------------------------------------------------------------------------
 
@@ -21,7 +21,21 @@ export default function ({
     data: dataSource,
     status,
     ...others
-  } = useAsyncData<GetNoteListReturnType>(url.value, () => $fetch(url.value));
+  } = useAsyncData<GetNoteListReturnType>(url.value, async () => {
+    try {
+      return await $fetch(url.value, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken.value}`,
+        },
+      });
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const errorData = (error as any).data;
+      throw new Error(errorData.error);
+    }
+  });
 
   // ------------------------------------------------------------------------------------------
 
@@ -39,9 +53,7 @@ export default function ({
 
   const isLoading = computed<boolean>(() => !isSuccess.value && !isError.value);
 
-  const isEmpty = computed<boolean>(
-    () => isSuccess.value && dataSource.value?.data?.notes.length === 0,
-  );
+  const isEmpty = computed<boolean>(() => data.value.length === 0);
 
   const isRefreshLoading = ref<boolean>(false);
 

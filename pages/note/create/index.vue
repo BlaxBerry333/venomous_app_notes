@@ -32,7 +32,7 @@ async function createMockData() {
   <layout-page-content-wrapper :page-title="t('nav.note-create')">
     <v-sheet
       :elevation="4"
-      class="py-4 px-4 py-md-10 px-md-8 flex-1-1"
+      class="py-4 px-4 py-md-10 px-md-8 flex-1-1 position-relative"
       style="background-color: transparent; backdrop-filter: blur(20px)"
     >
       <!-- editor -->
@@ -41,19 +41,18 @@ async function createMockData() {
         :editable="true"
         @tiptap-editor-update="editorData.content = $event"
       />
-    </v-sheet>
 
-    <section>
-      <v-btn
+      <!-- create button -->
+      <v-fab
+        size="large"
         :loading="isLoading"
         :disabled="isLoading"
-        class="flex-grow-1"
-        height="48"
-        variant="tonal"
+        :absolute="true"
+        :style="{ top: '40px', right: '16px' }"
         @click="createMockData"
       >
         {{ t("buttons.create") }}
-      </v-btn>
-    </section>
+      </v-fab>
+    </v-sheet>
   </layout-page-content-wrapper>
 </template>

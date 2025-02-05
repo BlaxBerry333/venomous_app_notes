@@ -1,6 +1,6 @@
 import { NoteModel } from "~/server/models";
 import { deleteRedisKey, getRedisKeysByPattern } from "~/server/utils/handle-redis";
-import { AccountDataType, CommonResponseDataType, NoteDataType } from "~/utils/types";
+import { CommonResponseDataType, NoteDataType } from "~/utils/types";
 
 export type PutNoteDataRequestBodyType = NoteDataType;
 
@@ -14,30 +14,6 @@ export type PutNoteDataReturnType = CommonResponseDataType<{
  */
 export default defineEventHandler(async (event): Promise<PutNoteDataReturnType> => {
   try {
-    const authorization = event.node.req.headers.authorization;
-    const accessToken = authorization?.split(" ")[1];
-    if (!accessToken) {
-      event.node.res.statusCode = 401;
-      return {
-        code: 401,
-        error: "[401] Unauthorized",
-        data: null,
-      };
-    }
-
-    const decodedToken = verifyToken<AccountDataType>(accessToken);
-
-    if (!decodedToken.data) {
-      event.node.res.statusCode = 401;
-      return {
-        code: 401,
-        error: "[401] Unauthorized",
-        data: null,
-      };
-    }
-
-    // ------------------------------------------------------------------------------------------
-
     const noteId = event.context.params?.id;
     if (!noteId) {
       event.node.res.statusCode = 400;

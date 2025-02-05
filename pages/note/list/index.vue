@@ -9,12 +9,16 @@ const { t } = useTranslation();
 
 // ------------------------------------------------------------------------------------------
 
-const { data, isLoading, isEmpty } = useGetNoteList({ selectedNoteType: undefined });
+const { data, isLoading, isEmpty, error } = useGetNoteList({ selectedNoteType: undefined });
 </script>
 
 <template>
   <layout-page-content-wrapper :page-title="t('nav.note-list')">
-    <section v-if="!isEmpty">
+    <section v-if="isEmpty">
+      <v-empty-state icon="mdi-semantic-web" :title="error" :size="200" />
+    </section>
+
+    <section v-else>
       <v-row>
         <v-col v-for="note in data" :key="note._id" cols="12" sm="6" lg="4">
           <v-card

@@ -1,4 +1,7 @@
-import type { NoteDataType as ProtoNoteDataType } from "venomous_app_protobuf/ts/notes";
+import type {
+  NoteDataType as ProtoNoteDataType,
+  AccountDataType as ProtoAccountDataType,
+} from "venomous_app_protobuf/ts/notes";
 
 export type CommonResponseDataType<T, DataType = undefined> = {
   code: number;
@@ -21,7 +24,7 @@ export type NoteDataType = {
   message: ProtoNoteDataType["message"];
   created_at: ProtoNoteDataType["createdAt"];
   updated_at: ProtoNoteDataType["updatedAt"];
-  account_id: string;
+  account_id: ProtoNoteDataType["accountId"];
 };
 
 export enum AccountRoleType {
@@ -30,13 +33,13 @@ export enum AccountRoleType {
 }
 
 export type AccountDataType = {
-  _id: string;
-  display_name: string;
-  password: string;
-  email: string;
-  avatar: string;
-  created_at: string;
-  updated_at: string;
+  _id: ProtoAccountDataType["Id"];
+  display_name: ProtoAccountDataType["displayName"];
+  password: ProtoAccountDataType["password"];
+  email: ProtoAccountDataType["email"];
+  avatar: ProtoAccountDataType["avatar"];
+  created_at: ProtoAccountDataType["createdAt"];
+  updated_at: ProtoAccountDataType["updatedAt"];
   role: AccountRoleType;
-  is_active: boolean;
+  is_active: ProtoAccountDataType["isActive"];
 };

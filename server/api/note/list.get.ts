@@ -63,8 +63,6 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     // ------------------------------------------------------------------------------------------
 
-    console.log(filterFields);
-
     const notes = await NoteModel.find(filterFields)
       .sort({ [orderField]: sortOption })
       .skip((page - 1) * count)

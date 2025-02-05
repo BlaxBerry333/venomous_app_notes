@@ -32,10 +32,7 @@ async function handleUpdate() {
 </script>
 
 <template>
-  <layout-page-content-wrapper
-    :page-title="t('pages-contents.note-detail-page.title')"
-    :show-page-title="false"
-  >
+  <layout-page-content-wrapper :page-title="t('pages-contents.note-detail-page.title')">
     <section v-if="!isEmpty" class="mb-4 mb-md-6">
       <v-sheet
         :elevation="4"
@@ -64,18 +61,17 @@ async function handleUpdate() {
 
     <v-sheet
       :elevation="4"
-      class="py-4 px-4 py-md-10 px-md-8 flex-1-1"
-      style="background-color: transparent; backdrop-filter: blur(20px)"
+      class="py-4 px-4 py-md-10 px-md-8 flex-1-1 position-relative"
+      style="background-color: transparent; backdrop-filter: blur(20px); position: relative"
     >
       <!-- update button -->
       <v-fab
-        @click="handleUpdate"
         size="large"
-        class="position-sticky"
         :loading="isUpdating"
         :disabled="isUpdating"
         :absolute="true"
-        :style="{ top: '90%', zIndex: 2 }"
+        :style="{ top: '16px', right: '16px' }"
+        @click="handleUpdate"
       >
         {{ t("buttons.edit") }}
       </v-fab>
