@@ -37,6 +37,7 @@
   },
 
   "messages": {
+    "status-empty": "没有数据",
     "status-loading": "加载中...",
     "confirm-logout": "确定要注销吗？",
     "confirm-logout-2": "注销后将无法访问您的帐户，直到再次登录"
@@ -92,7 +93,11 @@
       "display-name": "显示名称",
       "email-address": "登陆邮箱",
       "created-at": "创建时间",
-      "updated-at": "更新时间"
+      "updated-at": "更新时间",
+      "role": {
+        "ADMIN": "管理员用户",
+        "NORMAL": "普通用户"
+      }
     },
     "note-list-page": {},
     "note-detail-page": {

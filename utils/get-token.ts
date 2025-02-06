@@ -16,3 +16,25 @@ export function decodeJWT<T>(token: string) {
     expiresIn: number;
   };
 }
+
+/**
+ * 验证 token 是否过期
+ * 60 * 60 * 8 = 28800 = 8小时
+ */
+export function validateTokenExpires(token: string | undefined | null): boolean {
+  if (!token) {
+    return false;
+  }
+
+  try {
+    const decoded = decodeJWT(token);
+    if (!decoded || !("exp" in decoded)) {
+      return false;
+    }
+
+    const currentTime = Date.now() / 1000;
+    return decoded.exp > currentTime;
+  } catch {
+    return false;
+  }
+}

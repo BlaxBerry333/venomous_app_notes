@@ -37,6 +37,7 @@
   },
 
   "messages": {
+    "status-empty": "No Data",
     "status-loading": "Loading...",
     "confirm-logout": "Are you sure you want to log out?",
     "confirm-logout-2": "After logging out you will not be able to access your account until you log in again."
@@ -92,7 +93,11 @@
       "display-name": "Display Name",
       "email-address": "Email Address",
       "created-at": "Created At",
-      "updated-at": "Updated At"
+      "updated-at": "Updated At",
+      "role": {
+        "ADMIN": "Admin User",
+        "NORMAL": "Normal User"
+      }
     },
     "note-list-page": {},
     "note-detail-page": {

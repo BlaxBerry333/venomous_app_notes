@@ -9,39 +9,53 @@ const { t } = useTranslation();
 
 // ------------------------------------------------------------------------------------------
 
-const { data, isLoading, isEmpty, error } = useGetNoteList({ selectedNoteType: undefined });
+const { data, isLoading, isEmpty, isError, error } = useGetNoteList({
+  selectedNoteType: undefined,
+});
+
+function formatHTMLSting(htmlString: string): string {
+  return htmlString.match(/>([^<]+)<\/\w+/)?.[1] || "";
+}
 </script>
 
 <template>
   <layout-page-content-wrapper :page-title="t('nav.note-list')">
-    <section v-if="isEmpty">
+    <section v-if="isError" class="flex-1-1">
       <v-empty-state icon="mdi-semantic-web" :title="error" :size="200" />
     </section>
 
-    <section v-else>
-      <v-row>
-        <v-col v-for="note in data" :key="note._id" cols="12" sm="6" lg="4">
-          <v-card
-            :loading="isLoading"
-            :height="160"
-            hover
-            image="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            class="py-4"
-            style="background-color: transparent; backdrop-filter: blur(10px)"
-            @click="navigateTo(`/note/${note._id}`)"
-          >
-            <div class="card-mask" />
-            <div class="card-title">
-              <v-card-subtitle class="font-weight-black text-grey-lighten-2">
-                {{ $dayjs(note.updated_at).format("YYYY/MM/DD HH:mm") }}
-              </v-card-subtitle>
-              <v-card-title class="text-white font-weight-black">
-                {{ note.message.match(/>([^<]+)<\/\w+/)?.[1] || "" }}
-              </v-card-title>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
+    <section v-else-if="isEmpty" class="flex-1-1">
+      <v-empty-state icon="mdi-semantic-web" :title="t('messages.status-empty')" :size="200" />
+    </section>
+
+    <section v-if="!isError && !isEmpty">
+      <v-lazy :min-height="160 * 2" :options="{ threshold: 0.5 }" transition="fade-transition">
+        <v-row>
+          <v-col v-for="note in data" :key="note._id" cols="12" sm="6" lg="4">
+            <v-card
+              :loading="isLoading"
+              :height="160"
+              hover
+              image="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+              class="py-4"
+              style="background-color: transparent; backdrop-filter: blur(10px)"
+              @click="navigateTo(`/note/${note._id}`)"
+            >
+              <div class="card-mask" />
+              <div class="card-title">
+                <!-- updated_at -->
+                <v-card-subtitle class="font-weight-black text-grey-lighten-2">
+                  {{ $dayjs(note.updated_at).format("YYYY/MM/DD HH:mm") }}
+                </v-card-subtitle>
+                <!-- message -->
+                <v-card-title class="text-white font-weight-black">
+                  {{ formatHTMLSting(note.message) }}
+                </v-card-title>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-lazy>
     </section>
   </layout-page-content-wrapper>
 </template>

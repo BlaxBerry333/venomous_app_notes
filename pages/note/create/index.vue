@@ -39,7 +39,7 @@ async function createMockData() {
       <custom-tiptap-editor
         :text="editorData.content"
         :editable="true"
-        @tiptap-editor-update="editorData.content = $event"
+        @tiptap-editor-update="editorData.content = $event.html"
       />
 
       <!-- create button -->

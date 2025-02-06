@@ -28,10 +28,15 @@ export function signToken(payload: object): string {
  * - expiresIn: (表示Token的有效期限)
  */
 export function verifyToken<T>(token: string) {
-  return jwt.verify(token, secretKey) as {
-    data: T;
-    iat: number;
-    exp: number;
-    expiresIn: number;
-  };
+  try {
+    const JwtPayload = jwt.verify(token, secretKey) as {
+      data: T;
+      iat: number;
+      exp: number;
+      expiresIn: number;
+    };
+    return JwtPayload;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
 }

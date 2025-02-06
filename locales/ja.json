@@ -37,6 +37,7 @@
   },
 
   "messages": {
+    "status-empty": "データがありません",
     "status-loading": "読み込み中...",
     "confirm-logout": "ログアウトしますか？",
     "confirm-logout-2": "再度ログインするまでアカウントにアクセスできなくなります。"
@@ -92,7 +93,11 @@
       "display-name": "表示名",
       "email-address": "メールアドレス",
       "created-at": "作成日時",
-      "updated-at": "更新日時"
+      "updated-at": "更新日時",
+      "role": {
+        "ADMIN": "管理者ユーザー",
+        "NORMAL": "通常ユーザー"
+      }
     },
     "note-list-page": {},
     "note-detail-page": {

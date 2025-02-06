@@ -20,11 +20,30 @@ watchEffect(() => {
     navigateTo(PAGE_PATHNAME.accountSignin, { replace: true });
   }
 });
+
+// ------------------------------------------------------------------------------------------
+
+const isLogoutLoading = ref<boolean>(false);
+const isEmpty = computed<boolean>(() => !account.account);
+
+async function handleLogout() {
+  isLogoutLoading.value = true;
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await account.handleLogout();
+  isLogoutLoading.value = false;
+}
 </script>
 
 <template>
   <layout-page-content-wrapper :page-title="t('pages-contents.account-profile-page.title')">
-    <section class="d-flex flex-column flex-md-row mb-4 mb-md-6">
+    <section v-if="isLogoutLoading" class="flex-1-1">
+      <v-progress-linear color="primary" indeterminate />
+    </section>
+
+    <section
+      v-if="!isLogoutLoading && !isEmpty"
+      class="d-flex flex-column flex-md-row mb-4 mb-md-6"
+    >
       <!-- Mobile 小尺寸屏幕 -->
       <v-sheet
         border
@@ -43,13 +62,22 @@ watchEffect(() => {
           class="rounded-circle cursor-pointer border-md"
         />
         <section class="w-100 d-flex flex-column justify-center align-center d-md-none mt-2">
+          <!-- display_name -->
           <p class="text-h6 font-weight-black text-truncate" style="max-width: 300px">
             {{ account.account?.display_name }}
           </p>
+          <!-- email -->
           <p class="text-grey mt-0 text-truncate" style="max-width: 300px">
             {{ account.account?.email }}
           </p>
-          <div class="text-grey mt-4">
+          <!-- role -->
+          <p class="text-grey my-4 text-truncate" style="max-width: 300px">
+            <v-chip size="small" variant="elevated" color="primary">
+              {{ t(`pages-contents.account-profile-page.role.${account.account?.role}`) }}
+            </v-chip>
+          </p>
+          <!-- created_at & updated_at -->
+          <div class="text-grey">
             <p class="text-caption">
               <strong id="account-profile-page-strong-label">
                 {{ t("pages-contents.account-profile-page.created-at") }}
@@ -74,14 +102,23 @@ watchEffect(() => {
         style="background-color: transparent; backdrop-filter: blur(20px)"
       >
         <section class="w-100">
+          <!-- display_name -->
           <p class="text-h5 font-weight-black text-truncate" style="max-width: 600px">
             {{ account.account?.display_name }}
           </p>
+          <!-- email -->
           <p class="text-subtitle-1 text-grey text-truncate" style="max-width: 600px">
             {{ account.account?.email }}
           </p>
+          <!-- role -->
+          <p class="text-grey mb-2 text-truncate" style="max-width: 300px">
+            <v-chip size="x-small" variant="elevated" color="primary">
+              {{ t(`pages-contents.account-profile-page.role.${account.account?.role}`) }}
+            </v-chip>
+          </p>
         </section>
         <section class="w-100 d-flex align-center justify-space-between">
+          <!-- created_at & updated_at -->
           <div class="text-subtitle-1 text-grey">
             <p class="text-caption">
               <strong id="account-profile-page-strong-label">
@@ -103,7 +140,7 @@ watchEffect(() => {
       </v-sheet>
     </section>
 
-    <section>
+    <section v-if="!isLogoutLoading && !isEmpty">
       <v-sheet
         border
         :elevation="6"
@@ -114,8 +151,8 @@ watchEffect(() => {
       </v-sheet>
     </section>
 
-    <section class="d-block d-md-none">
-      <v-btn color="error" @click="account.handleLogout" class="w-100">
+    <section v-if="!isLogoutLoading && !isEmpty" class="d-block d-md-none">
+      <v-btn color="error" @click="handleLogout" class="w-100">
         {{ t("buttons.logout") }}
       </v-btn>
     </section>

@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (event: "tiptap-editor-update", value: string): void;
+  (event: "tiptap-editor-update", content: { html: string; text: string }): void;
 }>();
 
 const isBlank = ref<boolean>(false);
@@ -20,15 +20,17 @@ const editor = useEditor({
   editable: props.editable,
   autofocus: true,
   content: props.text ?? "<p>.... 🎉</p>",
-  onUpdate({ editor }) {
-    const contentValue: string = editor.getHTML();
-    emit("tiptap-editor-update", contentValue);
+  onUpdate: ({ editor }) => {
+    emit("tiptap-editor-update", {
+      html: editor.getHTML(),
+      text: editor.getText(),
+    });
     isBlank.value = !editor.getText();
   },
-  onBlur({ editor }) {
+  onBlur: ({ editor }) => {
     isBlank.value = !editor.getText();
   },
-  onFocus({ editor }) {
+  onFocus: ({ editor }) => {
     isBlank.value = !editor.getText();
   },
   extensions: [

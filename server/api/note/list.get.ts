@@ -49,7 +49,7 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     // ------------------------------------------------------------------------------------------
 
-    const REDIS_KEY: string = `note-list:${orderField}:${sortOption}:${typeField}:${page}:${count}`;
+    const REDIS_KEY: string = `note-list:${account_id}:${orderField}:${sortOption}:${typeField}:${page}:${count}`;
 
     const redisCachedNotes = await getRedisKey<ListPageDataType>(REDIS_KEY);
     if (redisCachedNotes) {

@@ -21,6 +21,10 @@ const useAccount = defineStore(
       isAuthenticated.value = false;
     }
 
+    async function checkAccessToken() {
+      isAuthenticated.value = validateTokenExpires(accessToken.value);
+    }
+
     async function handleLogoIn(_: Pick<AccountDataType, "email" | "password">) {
       try {
         const { data } = await $fetch<PostAccountLoginReturnType>("/api/account/login", {
@@ -87,6 +91,7 @@ const useAccount = defineStore(
       account,
       accessToken,
       isAuthenticated,
+      checkAccessToken,
       handleLogoIn,
       handleLogout,
       handleSignup,

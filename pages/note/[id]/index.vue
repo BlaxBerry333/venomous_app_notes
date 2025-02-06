@@ -14,7 +14,7 @@ const noteId = computed<string>(() => params.id as string);
 
 // ------------------------------------------------------------------------------------------
 
-const { data, isEmpty } = useGetNoteData({ noteId: noteId.value });
+const { data, isEmpty, isError, error } = useGetNoteData({ noteId: noteId.value });
 
 const { mutate: updateAsync, isLoading: isUpdating } = useUpdateNote({ noteId: noteId.value });
 
@@ -33,7 +33,15 @@ async function handleUpdate() {
 
 <template>
   <layout-page-content-wrapper :page-title="t('pages-contents.note-detail-page.title')">
-    <section v-if="!isEmpty" class="mb-4 mb-md-6">
+    <section v-if="isError" class="flex-1-1">
+      <v-empty-state icon="mdi-semantic-web" :title="error" :size="200" />
+    </section>
+
+    <section v-if="isEmpty" class="flex-1-1">
+      <v-empty-state icon="mdi-semantic-web" :title="t('messages.status-empty')" :size="200" />
+    </section>
+
+    <section v-if="!isError && !isEmpty" class="mb-4 mb-md-6">
       <v-sheet
         :elevation="4"
         class="py-4 px-4 py-md-10 px-md-8"
@@ -43,12 +51,14 @@ async function handleUpdate() {
           {{ data?.title }}
         </h3> -->
         <div class="d-flex flex-column flex-md-row">
+          <!-- created_at -->
           <p class="text-caption text-md-subtitle-2 font-weight-black text-grey mr-4">
             <strong id="note-detail-page-strong-label">
               {{ t("pages-contents.note-detail-page.created-at") }}
             </strong>
             {{ $dayjs(data?.created_at).format("YYYY/MM/DD HH:mm") }}
           </p>
+          <!-- updated_at -->
           <p class="text-caption text-md-subtitle-2 font-weight-black text-grey">
             <strong id="note-detail-page-strong-label">
               {{ t("pages-contents.note-detail-page.updated-at") }}
@@ -60,6 +70,7 @@ async function handleUpdate() {
     </section>
 
     <v-sheet
+      v-if="!isError && !isEmpty"
       :elevation="4"
       class="py-4 px-4 py-md-10 px-md-8 flex-1-1 position-relative"
       style="background-color: transparent; backdrop-filter: blur(20px); position: relative"
@@ -80,7 +91,7 @@ async function handleUpdate() {
       <custom-tiptap-editor
         :text="data?.message"
         :editable="true"
-        @tiptap-editor-update="editorData.content = $event"
+        @tiptap-editor-update="editorData.content = $event.html"
       />
     </v-sheet>
   </layout-page-content-wrapper>

@@ -7,19 +7,22 @@ const PATHNAME_NO_NEED_AUTHENTICATION: string[] = [
 ];
 
 export default defineNuxtRouteMiddleware((to) => {
-  const { isAuthenticated } = storeToRefs(useAccount());
+  const account = useAccount();
 
   if (to.path === PAGE_PATHNAME.home) {
     return;
   }
 
+  // 检查 accessToken
+  account.checkAccessToken();
+
   // 已经登录，访问登录相关页面时直接跳转到 note 列表
-  if (isAuthenticated.value && PATHNAME_NO_NEED_AUTHENTICATION.includes(to.path)) {
+  if (account.isAuthenticated && PATHNAME_NO_NEED_AUTHENTICATION.includes(to.path)) {
     return navigateTo(PAGE_PATHNAME.noteList, { replace: true });
   }
 
   // 未登陆，访问非登陆相关页面时直接跳转到登录
-  if (!isAuthenticated.value && !PATHNAME_NO_NEED_AUTHENTICATION.includes(to.path)) {
+  if (!account.isAuthenticated && !PATHNAME_NO_NEED_AUTHENTICATION.includes(to.path)) {
     return navigateTo(PAGE_PATHNAME.accountSignin, { replace: true });
   }
 });
