@@ -30,6 +30,12 @@ export default defineEventHandler((event) => {
         data: null,
       };
     }
+
+    // ------------------------------------------------------------------------------------------
+
+    event.context.AccessedAccountData = decodedToken.data;
+
+    // ...
   } catch (error) {
     return {
       code: 401,

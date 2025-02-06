@@ -36,12 +36,24 @@ export default defineEventHandler(async (event): Promise<GetNoteListReturnType> 
 
     // ------------------------------------------------------------------------------------------
 
+    const accessedAccountData: AccountDataType | null = event.context.AccessedAccountData;
+    const account_id = accessedAccountData?._id;
+    if (!account_id) {
+      event.node.res.statusCode = 400;
+      return {
+        code: 400,
+        error: "[400] account_id is required.",
+        data: null,
+      };
+    }
+
+    // ------------------------------------------------------------------------------------------
+
     const orderField = searchQueries?.sort || "created_at";
     const sortOption = searchQueries?.order_by === "asc" ? 1 : -1;
     const typeField = searchQueries?.type || "ALL";
     const page = searchQueries?.page || 1;
     const count = searchQueries?.count || 10;
-    const account_id = searchQueries?.account_id || "";
 
     const filterFields: Partial<NoteDataType> = {};
     if (typeField !== "ALL") filterFields.type = typeField;

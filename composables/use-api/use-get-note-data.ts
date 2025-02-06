@@ -3,12 +3,12 @@ import type { GetNoteDataReturnType } from "~/server/api/note/[id].get";
 import type { NoteDataType } from "~/utils/types";
 
 export default function ({ noteId }: { noteId: string }) {
-  const { account, accessToken } = storeToRefs(useAccount());
+  const { accessToken } = storeToRefs(useAccount());
 
   // ------------------------------------------------------------------------------------------
 
   const url = computed<string>(() => {
-    return `/api/note/${noteId}?account_id=${account.value?._id}`;
+    return `/api/note/${noteId}`;
   });
 
   const {

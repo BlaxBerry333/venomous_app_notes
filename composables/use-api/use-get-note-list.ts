@@ -7,12 +7,12 @@ export default function ({
 }: {
   selectedNoteType?: GetNoteListQueriesType["type"];
 }) {
-  const { account, accessToken } = storeToRefs(useAccount());
+  const { accessToken } = storeToRefs(useAccount());
 
   // ------------------------------------------------------------------------------------------
 
   const url = computed<string>(() => {
-    const baseUrl: string = `/api/note/list?account_id=${account.value?._id}`;
+    const baseUrl: string = "/api/note/list";
     if (selectedNoteType === undefined) return baseUrl;
     return `${baseUrl}&type=${selectedNoteType}`;
   });
